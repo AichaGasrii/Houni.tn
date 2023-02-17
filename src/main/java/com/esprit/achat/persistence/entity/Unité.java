@@ -1,0 +1,43 @@
+package com.esprit.achat.persistence.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+@Table(name = "unité")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Unité implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "symbol")
+    private String symbol;
+
+   /* @ManyToMany(mappedBy = "unitésProduit")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<OffreProduit> offreProduits;
+
+    @ManyToMany(mappedBy = "unitésService")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<OffreService> offreServices;
+
+    */
+}
