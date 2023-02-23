@@ -28,6 +28,8 @@ public class ItemCommande  implements Serializable {
     @Column(name = "QUANTITY")
     private Double quantity;
 
+    @Column(name = "TVA")
+    private Double tva;
     @Column(name = "PRICE_HT")
     private Double priceHt;
 

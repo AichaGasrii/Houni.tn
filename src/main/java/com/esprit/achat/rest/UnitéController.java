@@ -22,6 +22,7 @@ public class UnitéController {
 
     @PostMapping("/add")
     void add(@RequestBody Unité u){
+
         unitéService.add(u);
     }
 
@@ -39,4 +40,5 @@ public class UnitéController {
     Unité retrieve(@PathVariable("id") Integer id){
         return unitéService.retrieve(id);
     }
+
 }

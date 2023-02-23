@@ -1,12 +1,11 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.AppelOffre;
-import com.esprit.achat.persistence.entity.Facture;
 import com.esprit.achat.persistence.entity.OffreProduit;
 import com.esprit.achat.services.Interface.AppelOffreService;
 import com.esprit.achat.services.Interface.OffrePService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,4 +48,17 @@ public class OffreProduitController {
     OffreProduit retrieve(@PathVariable("id") Integer id){
         return offreService.retrieve(id);
     }
+
+
+   /* @PostMapping("/affecter-unites")
+    public ResponseEntity<OffreProduit> affecterUnitesAuxNaturesArticles(@RequestBody OffreProduit o) {
+        offreService.affecterUnitesAuxNaturesArticles(o);
+        return ResponseEntity.ok().build();
+    }
+
+    */
+
+
+
+
 }

@@ -58,6 +58,7 @@ com\esprit\achat\persistence\entity\JwtRequest.class
 com\esprit\achat\services\Interface\ItemCommandeService.class
 com\esprit\achat\repositories\AdresseRepository.class
 com\esprit\achat\Configuration\CorsConfiguration.class
+com\esprit\achat\services\Interface\UploadFileService.class
 com\esprit\achat\services\Interface\ImpotService.class
 com\esprit\achat\persistence\enumeration\ReclamationType.class
 com\esprit\achat\rest\AdresseController.class
@@ -74,6 +75,7 @@ com\esprit\achat\services\Implementation\FactureServiceIMP.class
 com\esprit\achat\rest\LocationController.class
 com\esprit\achat\persistence\entity\DemandeAchat.class
 com\esprit\achat\repositories\RoleRepository.class
+com\esprit\achat\rest\FileImageUploadController.class
 com\esprit\achat\rest\NatureArticleController.class
 com\esprit\achat\services\Implementation\ReclamationServiceIMP.class
 com\esprit\achat\repositories\ReclamationRepositoryMy.class
@@ -141,11 +143,13 @@ com\esprit\achat\repositories\AutreChargeRepository.class
 com\esprit\achat\services\Implementation\AutreChargeServiceIMP.class
 com\esprit\achat\persistence\enumeration\Methode.class
 com\esprit\achat\persistence\enumeration\OffreType.class
+com\esprit\achat\services\Implementation\UploadFileServiceImpl.class
 com\esprit\achat\services\Implementation\NatureArticleServiceIMP.class
 com\esprit\achat\persistence\entity\FactureAvoir.class
 com\esprit\achat\persistence\enumeration\MotInterdit.class
 com\esprit\achat\repositories\FactureAvoirRepository.class
 com\esprit\achat\rest\ReponseController.class
+com\esprit\achat\util\HelperClass.class
 com\esprit\achat\rest\JwtController.class
 com\esprit\achat\rest\OffreProduitController.class
 com\esprit\achat\services\Implementation\ItemFactureAvoirServiceIMP.class

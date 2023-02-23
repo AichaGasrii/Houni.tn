@@ -23,8 +23,18 @@ public class NatureArticle implements Serializable {
     private Integer id;
     private String secteur;
     private String description;
+    private String unité;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "natureArticle")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "natureArticle")
     private List<AppelOffre> appelOffres;
+
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private OffreProduit offreProduit;
+
+   @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Unité unite;
+
+
+
 
 }

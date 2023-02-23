@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "unité")
@@ -27,4 +28,8 @@ public class Unité implements Serializable {
 
     @Column(name = "symbol")
     private String symbol;
+
+    @OneToMany(mappedBy = "unite", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<NatureArticle> natureArticles;
+
 }

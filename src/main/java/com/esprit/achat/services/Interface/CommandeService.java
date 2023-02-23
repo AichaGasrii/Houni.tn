@@ -7,5 +7,7 @@ import com.esprit.achat.persistence.entity.Question;
 
 public interface CommandeService extends CrudService<Commande, Integer> {
     MontantPanier calculMontantPanier(Panier panier);
+
+    public void archiveExpiredCommande();
 }
 
