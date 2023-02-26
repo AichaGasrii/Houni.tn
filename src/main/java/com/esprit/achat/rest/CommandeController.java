@@ -5,6 +5,7 @@ import com.esprit.achat.persistence.dto.Panier;
 import com.esprit.achat.persistence.entity.Commande;
 import com.esprit.achat.persistence.entity.Facture;
 import com.esprit.achat.persistence.entity.Question;
+import com.esprit.achat.persistence.enumeration.Etat;
 import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.FactureService;
 import com.esprit.achat.services.Interface.ItemCommandeService;
@@ -61,6 +62,10 @@ public class CommandeController {
     MontantPanier montantPanier(@RequestBody Panier panier){
         return commandeService.calculMontantPanier(panier);
     }
+
+    @GetMapping("/nbCommandeParEtat/{etat}")
+    public Integer nbCommandeParEtat (@PathVariable Etat etat){
+        return  commandeService.nbCommandeParEtat(etat);}
 
 
 

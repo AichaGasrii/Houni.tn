@@ -22,11 +22,10 @@ public class Commande implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id ;
-    private String client;
+    private String clientcin;
     private String reponsableclient;
     private String adresseclient;
     private String devise;
-    private LocalDate dateFinCommande;
     @Temporal(TemporalType.DATE)
     private Date datefacture;
     private Double prixht;
@@ -34,7 +33,6 @@ public class Commande implements Serializable {
     private Double totaltva;
     private Double totalttc;
 
-    private Boolean archive;
 
     @Enumerated(EnumType.STRING)
     private Etat etat;

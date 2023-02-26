@@ -116,5 +116,20 @@ public class UserService {
         }
         return countadmin;
     }
+    public long countusers(){
+        long countusers=0;
+        List<User> users=userDao.findAll();
+        for(User user:users) {
+
+            Set<Role> roles=user.getRole();
+            Role role= roles.iterator().next();
+            String rolename = role.getRoleName();
+            if(rolename.equals("User")){
+                countusers +=1;
+            }
+        }
+        return countusers;
+    }
+
 
 }

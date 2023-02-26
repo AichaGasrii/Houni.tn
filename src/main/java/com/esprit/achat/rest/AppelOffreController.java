@@ -28,18 +28,17 @@ public class AppelOffreController {
     @PostMapping("/add")
     @CrossOrigin
     void add(@RequestBody  AppelOffre a){
-        if(Objects.nonNull(a.getUnité()) && Objects.nonNull(a.getUnité().getId()) && Objects.nonNull(a.getDemandeAchat()) && Objects.nonNull(a.getDemandeAchat().getId()) && Objects.nonNull(a.getNatureArticle()) && Objects.nonNull(a.getNatureArticle().getId()) ) {
-            Unité unité =  unitéService.retrieve(a.getUnité().getId());
+        if(Objects.nonNull(a.getDemandeAchat()) && Objects.nonNull(a.getDemandeAchat().getId()) && Objects.nonNull(a.getNatureArticle()) && Objects.nonNull(a.getNatureArticle().getId()) ) {
             DemandeAchat demandeAchat =  demandeAchatService.retrieve(a.getDemandeAchat().getId());
             NatureArticle natureArticle= natureArticleService.retrieve(a.getNatureArticle().getId());
 
-
-            a.setUnité(unité);
             a.setDemandeAchat(demandeAchat);
             a.setNatureArticle(natureArticle);
         }
+
         appelOffreService.add(a);
     }
+
 
     @PutMapping("/edit")
     void update(@RequestBody AppelOffre a){
@@ -55,4 +54,15 @@ public class AppelOffreController {
     AppelOffre retrieve(@PathVariable("id") Integer id){
         return appelOffreService.retrieve(id);
     }
+
+    @PutMapping(value = "/affecterAppleOffreAOffreProduit/{idA}/{idO}")
+    public void affecterAppleOffreAOffreProduit(@PathVariable("idA") Integer idA, @PathVariable("idO") Integer idO) {
+        appelOffreService.affecterAppleOffreAOffreProduit(idA, idO);
+    }
+
+    @GetMapping("/desaffecterAppeloffreNatureArticle/{idA}")
+    void desaffecterAppeloffreNatureArticle (@PathVariable Integer idA){
+        appelOffreService.desaffecterAppeloffreNatureArticle(idA );
+    }
+
 }

@@ -41,5 +41,3 @@ public class NatureArticleServiceIMP extends CrudServiceIMP<NatureArticle,Intege
         }
     }
 }
-
-

@@ -57,7 +57,6 @@ public class NatureArticleController {
     void affecterUnitesAuxNaturesArticles() {
         natureArticleService.affecterUnitesAuxNaturesArticles();
     }
-
     */
 
     @PostMapping("/affecter-unites")

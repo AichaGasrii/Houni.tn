@@ -1,6 +1,7 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.AppelOffre;
+import com.esprit.achat.persistence.entity.NatureArticle;
 import com.esprit.achat.persistence.entity.OffreProduit;
 import com.esprit.achat.services.Interface.AppelOffreService;
 import com.esprit.achat.services.Interface.OffrePService;
@@ -49,13 +50,18 @@ public class OffreProduitController {
         return offreService.retrieve(id);
     }
 
+    @GetMapping("/produit-nature/{nature}")
+    public List<OffreProduit> listeDeproduitParNature(@PathVariable("nature") NatureArticle natureArticle) {
+        return offreService.listeDeproduitParNature(natureArticle);
+    }
+
+
 
    /* @PostMapping("/affecter-unites")
     public ResponseEntity<OffreProduit> affecterUnitesAuxNaturesArticles(@RequestBody OffreProduit o) {
         offreService.affecterUnitesAuxNaturesArticles(o);
         return ResponseEntity.ok().build();
     }
-
     */
 
 

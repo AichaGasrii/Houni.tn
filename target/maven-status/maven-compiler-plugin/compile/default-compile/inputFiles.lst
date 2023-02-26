@@ -107,6 +107,7 @@ C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\Configuration\Jwt
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\repositories\QuesionRepositoryMy.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\ItemFactureController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\Facture.java
+C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\aspect\LoggingAspect.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\repositories\AppelOffreRepository.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\Historique.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implementation\ReclamationServiceIMP.java

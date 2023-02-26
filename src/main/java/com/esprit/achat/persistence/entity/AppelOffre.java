@@ -28,10 +28,6 @@ public class AppelOffre implements Serializable {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private DemandeAchat demandeAchat;
 
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Unité unité;
-
-
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private NatureArticle natureArticle;
 

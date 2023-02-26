@@ -27,11 +27,11 @@ public class DemandeAchat implements Serializable {
     @Enumerated(EnumType.STRING)
     private OffreType offreType;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "demandeAchat")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "demandeAchat")
     private List<AppelOffre> appelOffres;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private AutreCharge autreCharge;
 
 }

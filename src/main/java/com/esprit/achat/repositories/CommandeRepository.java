@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface CommandeRepository extends CrudRepository<Commande, Integer>{
-    public List<Commande> findByArchiveIsFalseAndDateFinCommande(LocalDate endDate);
-    public List<Commande> findByClient(String client);
+
+     public List<Commande> findByclientcin(String clientcin);
 }

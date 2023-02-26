@@ -31,7 +31,7 @@ public class NatureArticle implements Serializable {
     @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private OffreProduit offreProduit;
 
-   @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Unité unite;
 
 

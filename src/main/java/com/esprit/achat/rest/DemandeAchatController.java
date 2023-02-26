@@ -4,6 +4,8 @@ import com.esprit.achat.persistence.entity.AutreCharge;
 import com.esprit.achat.persistence.entity.Commande;
 import com.esprit.achat.persistence.entity.DemandeAchat;
 import com.esprit.achat.persistence.entity.Facture;
+import com.esprit.achat.persistence.enumeration.Etat;
+import com.esprit.achat.persistence.enumeration.OffreType;
 import com.esprit.achat.services.Interface.AutreChargeService;
 import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.DemandeAchatService;
@@ -31,7 +33,6 @@ public class DemandeAchatController {
             AutreCharge autreCharge =  autreChargeService.retrieve(d.getAutreCharge().getId());
             d.setAutreCharge(autreCharge);
         }
-
         demandeAchatService.add(d);
     }
 
@@ -49,4 +50,6 @@ public class DemandeAchatController {
     DemandeAchat retrieve(@PathVariable("id") Integer id){
         return demandeAchatService.retrieve(id);
     }
+
+
 }

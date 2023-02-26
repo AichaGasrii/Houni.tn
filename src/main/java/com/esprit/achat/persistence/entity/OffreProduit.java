@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+
 @Entity
 @Table(name = "offreProduit")
 @Getter
@@ -36,3 +37,4 @@ public class OffreProduit implements Serializable {
 
 
 }
+

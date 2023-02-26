@@ -68,6 +68,11 @@ public class UserController {
     @GetMapping("/countadmin")
     @PreAuthorize("hasRole('Admin')")
     public long countadmin(){return userService.countadmin();}
+    @GetMapping("/countusers")
+    @PreAuthorize("hasRole('Admin')")
+    public long countusers(){return userService.countusers();}
+
+
 
 
 }

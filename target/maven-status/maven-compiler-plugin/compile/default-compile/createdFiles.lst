@@ -31,6 +31,7 @@ com\esprit\achat\persistence\entity\Reclamation.class
 com\esprit\achat\persistence\entity\Role.class
 com\esprit\achat\rest\AutreChargeController.class
 com\esprit\achat\rest\UnitéController.class
+com\esprit\achat\aspect\LoggingAspect.class
 com\esprit\achat\persistence\entity\Question.class
 com\esprit\achat\repositories\ItemFactureAvoirRepository.class
 com\esprit\achat\services\Interface\OffrePService.class

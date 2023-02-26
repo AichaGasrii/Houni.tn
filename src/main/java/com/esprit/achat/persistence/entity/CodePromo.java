@@ -16,6 +16,7 @@ public class CodePromo implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id;
+    @Column(name = "code", nullable = false, unique = true)
     private String code;
     private Double remise;
 }

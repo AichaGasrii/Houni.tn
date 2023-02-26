@@ -13,6 +13,18 @@ import java.util.List;
 
 @Service
 public class OffrePServiceIMP extends CrudServiceIMP<OffreProduit,Integer> implements OffrePService {
+
+
+    @Autowired
+    OffreProduitRepository offreProduitRepository;
+
+    @Override
+    public List<OffreProduit> listeDeproduitParNature(NatureArticle natureArticle){
+        return offreProduitRepository.produitParNature(natureArticle);
+
+    }
+
+
     /*
     @Autowired
     NatureArticleRepository natureArticleRepository;
@@ -42,4 +54,6 @@ public class OffrePServiceIMP extends CrudServiceIMP<OffreProduit,Integer> imple
     }
 
      */
+
+
 }
