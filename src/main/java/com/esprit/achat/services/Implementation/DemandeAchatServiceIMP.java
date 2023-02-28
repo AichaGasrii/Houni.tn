@@ -29,7 +29,7 @@ public class DemandeAchatServiceIMP extends CrudServiceIMP<DemandeAchat,Integer>
     }
 
     @Override
-    @Scheduled(cron = "*/30 * * * * *")
+   // @Scheduled(cron = "*/30 * * * *")
     public void nbreAchatParType() {
         log.info("--- Nombre des demandes d'achat PRODUIT :" + demandeAchatReporitory.nbreAchatParType(OffreType.PRODUIT));
         log.info("--- Nombre des demandes d'achat SERVICE : " + demandeAchatReporitory.nbreAchatParType(OffreType.SERVICE));

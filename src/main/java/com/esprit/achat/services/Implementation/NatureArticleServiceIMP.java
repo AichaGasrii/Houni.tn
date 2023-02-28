@@ -1,11 +1,10 @@
 package com.esprit.achat.services.Implementation;
 
-import com.esprit.achat.persistence.entity.AppelOffre;
 import com.esprit.achat.persistence.entity.NatureArticle;
+import com.esprit.achat.persistence.entity.OffreProduit;
 import com.esprit.achat.repositories.NatureArticleRepository;
 import com.esprit.achat.repositories.OffreProduitRepository;
 import com.esprit.achat.repositories.UnitéRepository;
-import com.esprit.achat.services.Interface.AppelOffreService;
 import com.esprit.achat.services.Interface.NatureArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,15 +28,32 @@ public class NatureArticleServiceIMP extends CrudServiceIMP<NatureArticle,Intege
         }
         natureArticleRepository.saveAll(natureArticles);
     }
-
     public String obtenirUnitePourNatureArticle(NatureArticle natureArticle) {
-        // Logique métier pour obtenir l'unité à affecter à la nature d'article
-        if (natureArticle.getSecteur().equals("Fruits")) {
-            return "kg";
-        } else if (natureArticle.getSecteur().equals("Produits laitiers")) {
-            return "L";
-        } else {
-            return "unité";
+        if (natureArticle == null) {
+            return "unité introuvable";
         }
+        String secteur = natureArticle.getSecteur().trim().toLowerCase();
+        switch (secteur) {
+            case "fruits":
+                return "kg";
+            case "produits laitiers":
+                return "L";
+            case "appareils":
+            case "produits de beauté":
+                return "pièces";
+            case "cables":
+                return "mètre";
+            default:
+                return "unité introuvable";
+        }
+    }
+
+    @Override
+    public void affecteroffreproduitANatureArticle(OffreProduit o, int idNatureArticle){
+        //offreproduit child w nature article master
+        // On affecte le child au master
+        NatureArticle n =natureArticleRepository.findById(idNatureArticle).get();
+        n.getOffreProduit().getId();
+        natureArticleRepository.save(n);
     }
 }

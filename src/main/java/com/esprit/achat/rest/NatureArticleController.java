@@ -28,14 +28,19 @@ public class NatureArticleController {
     @PostMapping("/add")
     void add(@RequestBody NatureArticle n){
 
-        if(Objects.nonNull(n.getOffreProduit()) && Objects.nonNull(n.getOffreProduit().getId()) && Objects.nonNull(n.getUnite()) && Objects.nonNull(n.getUnite().getId()) ) {
+        if(Objects.nonNull(n.getOffreProduit()) && Objects.nonNull(n.getOffreProduit().getId()) ) {
             OffreProduit offreProduit =  offrePService.retrieve(n.getOffreProduit().getId());
-            Unité unité =  unitéService.retrieve(n.getUnite().getId());
+
             n.setOffreProduit(offreProduit);
-            n.setUnite(unité);
+
         }
 
         natureArticleService.add(n);
+    }
+
+    @PutMapping("affecteroffreproduitANatureArticle/{idNatureArticle}")
+    void affecteroffreproduitANatureArticle(@RequestBody OffreProduit o, @PathVariable int idNatureArticle) {
+        natureArticleService.affecteroffreproduitANatureArticle(o,idNatureArticle);
     }
 
     @PutMapping("/edit")
@@ -53,15 +58,12 @@ public class NatureArticleController {
         return natureArticleService.retrieve(id);
     }
 
-   /* @PostMapping("/affecter-unites")
-    void affecterUnitesAuxNaturesArticles() {
-        natureArticleService.affecterUnitesAuxNaturesArticles();
-    }
-    */
 
     @PostMapping("/affecter-unites")
-    public ResponseEntity<Unité> affecterUnitesAuxNaturesArticles() {
+    public ResponseEntity<NatureArticle> affecterUnitesAuxNaturesArticles() {
         natureArticleService.affecterUnitesAuxNaturesArticles();
         return ResponseEntity.ok().build();
     }
+
+
 }

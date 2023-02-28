@@ -18,9 +18,11 @@ public class Paiement implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id = 0;
-    private Double montant;
-    @Temporal(TemporalType.DATE)
-    private Date datepaiement;
+    private Double price;
+    private String currency;
+    private String method;
+    private String intent;
+    private String description;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
       @JoinColumn(name = "facture_id", updatable = false)

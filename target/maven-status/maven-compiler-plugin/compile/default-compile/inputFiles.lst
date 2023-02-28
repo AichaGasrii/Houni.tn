@@ -1,5 +1,6 @@
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\FactureController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Interface\RatingService.java
+C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\Configuration\PaypalConfig.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\OffreProduit.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\CommandeController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Interface\DemandeAchatService.java
@@ -30,6 +31,7 @@ C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entit
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Interface\AdresseService.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\Location.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\PaiementController.java
+C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implementation\PaypalService.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\AdresseController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\RatingController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implementation\UserService.java
@@ -39,6 +41,7 @@ C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implemen
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Interface\DepartementService.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\NatureArticle.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\JwtRequest.java
+C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implementation\PDFGeneratorService.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\Reclamation.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\AutreChargeController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\Role.java
@@ -64,6 +67,8 @@ C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\dto\M
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\repositories\CrudRepository.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\enumeration\ECharge.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\QuestionController.java
+C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\PaypalController.java
+C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\rest\PDFExportController.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\persistence\entity\OffreService.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implementation\AutreChargeServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-dev\src\main\java\com\esprit\achat\services\Implementation\FactureavoirServiceIMP.java

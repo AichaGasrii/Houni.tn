@@ -30,7 +30,6 @@ public class Unité implements Serializable {
     @Column(name = "symbol")
     private String symbol;
 
-    @OneToMany(mappedBy = "unite", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private List<NatureArticle> natureArticles;
+
 
 }

@@ -56,7 +56,7 @@ public class AppelOffreController {
     }
 
     @PutMapping(value = "/affecterAppleOffreAOffreProduit/{idA}/{idO}")
-    public void affecterAppleOffreAOffreProduit(@PathVariable("idA") Integer idA, @PathVariable("idO") Integer idO) {
+    public void affecterAppleOffreAOffreProduit(@PathVariable int idA, @PathVariable int idO) {
         appelOffreService.affecterAppleOffreAOffreProduit(idA, idO);
     }
 
