@@ -33,5 +33,7 @@ public class OffreProduit implements Serializable {
     @OneToMany(mappedBy = "offreProduit", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<NatureArticle> natureArticles;
 
+
+
 }
 

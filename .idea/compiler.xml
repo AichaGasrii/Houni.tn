@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="achat" />
+        <module name="Centrale-d-achat-P-I4-me-int-gr-avecmetier" />
         <module name="Centrale-d-achat-P-I4-me-dev" />
       </profile>
     </annotationProcessing>
@@ -15,6 +16,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Centrale-d-achat-P-I4-me-dev" options="-parameters" />
+      <module name="Centrale-d-achat-P-I4-me-int-gr-avecmetier" options="-parameters" />
       <module name="achat" options="-parameters" />
     </option>
   </component>

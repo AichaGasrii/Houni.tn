@@ -1,6 +1,7 @@
 package com.esprit.achat.persistence.entity;
 
 import com.esprit.achat.persistence.enumeration.ReclamationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +35,10 @@ public class Reclamation implements Serializable {
     @Enumerated(EnumType.STRING)
     private ReclamationType reclamationType;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "reclamation", updatable = false)
+    @ManyToOne
+    @JsonIgnore
     private Commande commande;
-
+     @ManyToOne
+     private User user;
 
 }

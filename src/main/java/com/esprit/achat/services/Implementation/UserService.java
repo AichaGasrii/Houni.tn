@@ -130,6 +130,14 @@ public class UserService {
         }
         return countusers;
     }
+    public User retrieve(String username) {
+        try{
+            return  userDao.findById(username).get();
+        } catch (Exception err) {
+            System.out.println("Un erreur est survenue : " + err);
+        }
+        return null;
+    }
 
 
 }
