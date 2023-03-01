@@ -5,12 +5,14 @@ import com.esprit.achat.persistence.entity.Paiement;
 import com.esprit.achat.services.Interface.DeviseService;
 import com.esprit.achat.services.Interface.PaiementService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/paiement")
+@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class PaiementController {
 

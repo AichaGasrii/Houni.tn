@@ -6,11 +6,13 @@ import com.esprit.achat.services.Implementation.ImpotServiceIMP;
 import com.esprit.achat.services.Interface.FactureService;
 import com.esprit.achat.services.Interface.ImpotService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
 @RequestMapping("/impot")
+@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class ImpotController {
     private ImpotService impotService;

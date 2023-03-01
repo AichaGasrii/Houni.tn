@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class AutreCharge implements Serializable {
-    //  -------------------oussema-------------------
+    //  -------------------oussema-------------------role:user
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id;

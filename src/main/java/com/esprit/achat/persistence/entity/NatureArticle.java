@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class NatureArticle implements Serializable {
-    //  -------------------aicha-------------------
+    //  -------------------aicha-------------------role:operateur
     private static final long serialVersionUID = 1L;
 
     @Id

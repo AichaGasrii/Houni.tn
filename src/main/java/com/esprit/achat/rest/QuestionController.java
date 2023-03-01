@@ -3,12 +3,14 @@ package com.esprit.achat.rest;
 import com.esprit.achat.persistence.entity.Question;
 import com.esprit.achat.services.Interface.QuestionService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/question")
+    @PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class QuestionController {
 

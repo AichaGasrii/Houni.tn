@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class AppelOffre implements Serializable {
-    //  -------------------aicha-------------------
+    //  -------------------aicha-------------------role:fournisseur
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id;

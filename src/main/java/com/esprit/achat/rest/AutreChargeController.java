@@ -5,12 +5,14 @@ import com.esprit.achat.persistence.entity.Commande;
 import com.esprit.achat.services.Interface.AutreChargeService;
 import com.esprit.achat.services.Interface.CommandeService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/autreCharge")
+@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class AutreChargeController {
     private AutreChargeService autreChargeService;

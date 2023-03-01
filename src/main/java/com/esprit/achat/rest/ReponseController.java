@@ -3,11 +3,13 @@ package com.esprit.achat.rest;
 import com.esprit.achat.persistence.entity.Reponse;
 import com.esprit.achat.services.Interface.ReponseService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
 @RequestMapping("/reponse")
+@PreAuthorize("hasRole('Operateur')")
 @AllArgsConstructor
 public class ReponseController {
     private ReponseService reponseService;

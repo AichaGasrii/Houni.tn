@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class OffreService implements Serializable {
-    //  -------------------aicha-------------------
+    //  -------------------aicha-------------------role:fournisseur
     private static final long serialVersionUID = 1L;
 
     @Id

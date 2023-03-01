@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class OffreProduit implements Serializable {
-    //  -------------------aicha-------------------
+    //  -------------------aicha-------------------role:fournisseur
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -32,6 +32,8 @@ public class OffreProduit implements Serializable {
 
     @OneToMany(mappedBy = "offreProduit", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<NatureArticle> natureArticles;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "OffreProduit")
+    private List<Rating> ratings;
 
 
 

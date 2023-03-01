@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class ItemCommande  implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------:role:operateur
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,12 +1,11 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.*;
-import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.NatureArticleService;
 import com.esprit.achat.services.Interface.OffrePService;
-import com.esprit.achat.services.Interface.UnitéService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,11 +13,12 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/natureArticle")
+@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class NatureArticleController {
     private NatureArticleService natureArticleService;
     private OffrePService offrePService;
-    private UnitéService unitéService;
+
 
     @GetMapping
     List<NatureArticle> retrieveAll(){

@@ -5,12 +5,14 @@ import com.esprit.achat.persistence.entity.Devise;
 import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.DeviseService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/devise")
+@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class DeviseController {
 

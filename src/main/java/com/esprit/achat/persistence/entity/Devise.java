@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Devise implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------:user
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id;

@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Commande implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------role:operateur
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id ;

@@ -21,12 +21,10 @@ public class Rating implements Serializable {
     private Integer id;
     private Integer rate;
     @ManyToOne
-    @JoinColumn(name = "OffreProduitId", nullable = false)
   //  @JsonIgnore
     private OffreProduit OffreProduit;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
    // @JsonIgnore
     private User user;
 

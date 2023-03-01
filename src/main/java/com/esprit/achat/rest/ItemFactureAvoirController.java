@@ -9,6 +9,7 @@ import com.esprit.achat.services.Interface.ItemFactureService;
 import com.esprit.achat.services.Interface.OffrePService;
 import com.esprit.achat.services.Interface.OffreSService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/itemfactureavoir")
+@PreAuthorize("hasRole('Fournisseur')")
 @AllArgsConstructor
 public class ItemFactureAvoirController {
     private ItemFactureAvoirService itemFactureAvoirService;

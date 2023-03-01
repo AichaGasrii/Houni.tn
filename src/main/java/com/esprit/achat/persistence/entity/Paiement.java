@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Paiement implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------role:acheteur
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id = 0;

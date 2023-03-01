@@ -4,7 +4,6 @@ import com.esprit.achat.persistence.entity.NatureArticle;
 import com.esprit.achat.persistence.entity.OffreProduit;
 import com.esprit.achat.repositories.NatureArticleRepository;
 import com.esprit.achat.repositories.OffreProduitRepository;
-import com.esprit.achat.repositories.UnitéRepository;
 import com.esprit.achat.services.Interface.NatureArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,6 @@ import java.util.List;
 public class NatureArticleServiceIMP extends CrudServiceIMP<NatureArticle,Integer> implements NatureArticleService {
     @Autowired
     NatureArticleRepository natureArticleRepository;
-    @Autowired
-    UnitéRepository unitéRepository;
     @Autowired
     OffreProduitRepository offreProduitRepository;
 

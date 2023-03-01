@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class CodePromo implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------role:operateur
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id;

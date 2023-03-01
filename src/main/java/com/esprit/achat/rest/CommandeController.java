@@ -12,6 +12,7 @@ import com.esprit.achat.services.Interface.ItemCommandeService;
 import com.esprit.achat.services.Interface.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/commande")
+@PreAuthorize("hasRole('Operateur')")
 @AllArgsConstructor
 public class CommandeController {
 

@@ -17,7 +17,8 @@ import java.io.IOException;
 @Service
 public class PDFGeneratorService {
     /*
-    public void export(List<Facture> factureList, HttpServletResponse response) throws DocumentException , IOException {
+
+    public void export(Facture facture, HttpServletResponse response) throws DocumentException , IOException {
 
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
@@ -35,17 +36,16 @@ public class PDFGeneratorService {
         table.setSpacingBefore(10);
         //table.setwidths(new float [J (2f, 3f, 3f));
         writeFactureHeader(table);
-        writeFactureData(table, factureList);
+        writeFactureData(table, facture);
         document.add(table);
         document.close();
     }
 
-        private void writeFactureData(PdfPTable table, List<Facture>  factureList) {
-        for (Facture emp : factureList) {
-            table.addCell(String.valueOf(emp.getItems())); table.addCell(emp.getClient());
-            table.addCell (emp.getAdresseclient()) ;
+        private void writeFactureData(PdfPTable table, Facture facture) {
+            table.addCell(String.valueOf(facture.getItems())); table.addCell(facture.getClient());
+            table.addCell (facture.getAdresseclient()) ;
         }
-        }
+
         private void writeFactureHeader (PdfPTable table) {
             PdfPCell cell = new PdfPCell();
             cell.setBackgroundColor(Color.ORANGE);
@@ -62,4 +62,8 @@ public class PDFGeneratorService {
 
 
 
+
+
 }
+
+

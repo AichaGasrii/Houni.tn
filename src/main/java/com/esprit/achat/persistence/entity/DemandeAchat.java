@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class DemandeAchat implements Serializable {
-    //  -------------------aicha-------------------
+    //  -------------------aicha-------------------role:user
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id ;
@@ -29,7 +29,6 @@ public class DemandeAchat implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "demandeAchat")
     private List<AppelOffre> appelOffres;
-
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private AutreCharge autreCharge;

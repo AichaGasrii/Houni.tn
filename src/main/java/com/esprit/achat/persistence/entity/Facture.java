@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class Facture implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------:fournisseur
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id ;

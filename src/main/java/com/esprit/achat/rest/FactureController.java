@@ -5,12 +5,14 @@ import com.esprit.achat.persistence.entity.Facture;
 import com.esprit.achat.services.Interface.DeviseService;
 import com.esprit.achat.services.Interface.FactureService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/facture")
+@PreAuthorize("hasRole('Fournisseur')")
 @AllArgsConstructor
 public class FactureController {
 

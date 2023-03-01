@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class ItemFacture implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------role:fournisseur
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

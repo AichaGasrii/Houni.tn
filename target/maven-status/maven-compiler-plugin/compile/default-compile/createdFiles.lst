@@ -14,8 +14,6 @@ com\esprit\achat\repositories\OffreProduitRepository.class
 com\esprit\achat\persistence\entity\NatureArticle.class
 com\esprit\achat\persistence\entity\Reponse.class
 com\esprit\achat\persistence\dto\MontantPanier.class
-com\esprit\achat\services\Interface\UnitéService.class
-com\esprit\achat\repositories\UnitéRepository.class
 com\esprit\achat\rest\FactureAvoirController.class
 com\esprit\achat\repositories\AppelOffreRepository.class
 com\esprit\achat\repositories\ItemCommandeRepository.class
@@ -23,14 +21,12 @@ com\esprit\achat\repositories\CommandeRepository.class
 com\esprit\achat\services\Implementation\ItemCommandeServiceIMP.class
 com\esprit\achat\services\Interface\AdresseService.class
 com\esprit\achat\services\Implementation\RoleService.class
-com\esprit\achat\persistence\entity\Unité.class
 com\esprit\achat\rest\CodePromoController.class
 com\esprit\achat\services\Implementation\JwtService.class
 com\esprit\achat\repositories\CrudRepository.class
 com\esprit\achat\persistence\entity\Reclamation.class
 com\esprit\achat\persistence\entity\Role.class
 com\esprit\achat\rest\AutreChargeController.class
-com\esprit\achat\rest\UnitéController.class
 com\esprit\achat\aspect\LoggingAspect.class
 com\esprit\achat\persistence\entity\Question.class
 com\esprit\achat\repositories\ItemFactureAvoirRepository.class
@@ -63,12 +59,10 @@ com\esprit\achat\services\Interface\UploadFileService.class
 com\esprit\achat\services\Interface\ImpotService.class
 com\esprit\achat\persistence\enumeration\ReclamationType.class
 com\esprit\achat\rest\AdresseController.class
-com\esprit\achat\services\Implementation\UnitéServiceIMP.class
 com\esprit\achat\persistence\entity\AppelOffre.class
 com\esprit\achat\persistence\enumeration\Status.class
 com\esprit\achat\services\Interface\QuestionService.class
 com\esprit\achat\rest\UserController.class
-com\esprit\achat\persistence\enumeration\ERole.class
 com\esprit\achat\services\Implementation\ReponseServiceIMP.class
 com\esprit\achat\services\Implementation\UserService.class
 com\esprit\achat\mail\EmailControllers.class
@@ -132,7 +126,6 @@ com\esprit\achat\repositories\FactureRepository.class
 com\esprit\achat\rest\FactureController.class
 com\esprit\achat\repositories\CodePromoRepository.class
 com\esprit\achat\rest\ItemFactureController.class
-com\esprit\achat\persistence\entity\Historique.class
 com\esprit\achat\Configuration\CorsConfiguration$1.class
 com\esprit\achat\persistence\enumeration\ECharge.class
 com\esprit\achat\services\Implementation\OffrePServiceIMP.class

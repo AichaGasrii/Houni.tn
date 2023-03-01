@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Impot implements Serializable {
-    //  -------------------salma-------------------
+    //  -------------------salma-------------------role:operateur
 
     private static final long serialVersionUID = 1L;
 

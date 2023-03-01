@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RatingRepositoryMy extends CrudRepository<Rating, Integer> {
-    @Query("SELECT c.rate,COUNT(c.id) FROM Rating c where c.OffreProduit.id= :id_offer GROUP BY  c.rate")
+public interface RatingRepositoryMy extends JpaRepository<Rating, Integer> {
+    //List<Rating> indByOffreProduitId(Integer OffreProduitId);
+    //@Query("SELECT c FROM Rating c where c.OffreProduit.id= :id_offer GROUP BY COUNT(c.OffreProduit.id)")
+   @Query("SELECT c.rate,COUNT(c.id) FROM Rating c where c.OffreProduit.id= :id_offer GROUP BY  c.rate")
     Object[] getRatingByOffer(@Param("id_offer") Integer idoff);
     // @Query("SELECT p.id, COUNT(r.id) FROM Product p LEFT JOIN Rating r ON p.id = r.product_id WHERE p.id = :productId GROUP BY p.id")}
 }
