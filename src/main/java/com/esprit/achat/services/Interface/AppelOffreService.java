@@ -11,5 +11,5 @@ public interface AppelOffreService extends CrudService<AppelOffre, Integer>{
 
     void desaffecterAppeloffreNatureArticle(Integer idA);
 
-   // AppelOffre trouverMeilleurMatch(DemandeAchat demande) ;
+    AppelOffre trouverMeilleurMatch(DemandeAchat demande) ;
 }

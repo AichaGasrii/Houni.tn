@@ -39,12 +39,12 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
         appelOffreRepository.save(appelOffre);
 
     }
-    /*
+
 @Override
-    public AppelOffre trouverMeilleurMatch(DemandeAchat demande) {
+    public AppelOffre trouverMeilleurMatch(DemandeAchat demande)  {
 
         AppelOffre meilleurMatch = null;
-        double meilleureNote = 0.0;
+        double meilleureNote = 2.0;
 
     List<AppelOffre> offres = appelOffreRepository.findAll();
 
@@ -55,11 +55,11 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
                 note += 1.0;
             }
 
-            if (demande.getQuantiteMin() <= offre.getQuantiteMin()) {
+            if (demande.getObjet().equals(offre.getObjet())) {
                 note += 1.0;
             }
 
-            if (demande.getObjet().equals(offre.getObjet())) {
+            if (demande.getQuantiteMin() <= offre.getQuantiteMin()) {
                 note += 1.0;
             }
 
@@ -73,11 +73,12 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
 
 
         // Envoyer une notification  avec le meilleur match trouvé
-        String message = "Le meilleur match pour la demande d'achat " + demande.getId() + " est l'appel d'offre " + meilleurMatch.getId();
-        Notif(message);
+       // String message = "Le meilleur match pour la demande d'achat " + demande.getId() + " est l'appel d'offre " + meilleurMatch.getId();
+       // Notif(message);
 
         return meilleurMatch;
     }
+    /*
 
     public void Notif(String message) throws JSONException {
         RestTemplate restTemplate = new RestTemplate();
@@ -86,7 +87,7 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         String url = "https://api.postman.com/v1/messages";
-        String apiKey = "your_api_key";
+        String apiKey = "PMAK-63ffbe555bf7502484ece332-afac13d073701843bf753adb14b5fe9d5a";
 
         JSONObject json = new JSONObject();
         json.put("text", message);
@@ -97,9 +98,11 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
         System.out.println(response.getBody());
     }
 
-
-
      */
+
+
+
+
 
 
 }

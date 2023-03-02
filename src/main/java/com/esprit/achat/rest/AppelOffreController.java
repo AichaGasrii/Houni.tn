@@ -1,9 +1,11 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.*;
+import com.esprit.achat.repositories.AppelOffreRepository;
 import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
 import org.json.JSONException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,7 @@ public class AppelOffreController {
     private AppelOffreService appelOffreService;
     private DemandeAchatService demandeAchatService;
     private NatureArticleService natureArticleService;
-    private OffrePService offrePService;
+    private AppelOffreRepository appelOffreRepository;
     private OffreSService offreSService;
 
     @GetMapping
@@ -66,14 +68,67 @@ public class AppelOffreController {
     void desaffecterAppeloffreNatureArticle(@PathVariable Integer idA) {
         appelOffreService.desaffecterAppeloffreNatureArticle(idA);
     }
-/*
-    @PostMapping("/MeilleurMatch/{demande}")
-    public AppelOffre trouverMeilleurMatch(@PathVariable ("demande") DemandeAchat demande)  {
-        return appelOffreService.trouverMeilleurMatch(demande);
 
+    @PostMapping("/meilleurMatch/{demande}")
+    public ResponseEntity<AppelOffre> trouverMeilleurMatch(@PathVariable ("demande") DemandeAchat demande){
+        AppelOffre meilleurMatch = appelOffreService.trouverMeilleurMatch(demande);
+
+        if (meilleurMatch == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(meilleurMatch);
     }
 
- */
+    /*@PostMapping("/trouverMeilleurMatch")
+    public ResponseEntity<AppelOffre> trouverMeilleurMatch(@RequestBody DemandeAchat demande) {
 
+        AppelOffre meilleurMatch = null;
+        double meilleureNote = 2.0;
+
+        List<AppelOffre> offres = appelOffreRepository.findAll();
+
+        for (AppelOffre offre : offres) {
+            double note = 0.0;
+
+            if (demande.getNom().equals(offre.getNom())) {
+                note += 1.0;
+            }
+
+            if (demande.getQuantiteMin() <= offre.getQuantiteMin()) {
+                note += 1.0;
+            }
+
+            if (demande.getObjet().equals(offre.getObjet())) {
+                note += 1.0;
+            }
+
+            // autres règles de correspondance
+
+            if (note > meilleureNote) {
+                meilleurMatch = offre;
+                meilleureNote = note;
+            }
+        }
+
+        if (meilleurMatch == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(meilleurMatch);
+    }
+
+     */
+   /* @GetMapping("/trouverMeilleurMatch/{demandeId}")
+    public ResponseEntity<AppelOffre> trouverMeilleurMatch(@PathVariable Integer demandeId) {
+        DemandeAchat demande = new DemandeAchat();
+        demande.setId(demandeId);
+        AppelOffre meilleurMatch = appelOffreService.trouverMeilleurMatch(demande);
+        if (meilleurMatch == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(meilleurMatch);
+    }
+
+    */
 
 }
