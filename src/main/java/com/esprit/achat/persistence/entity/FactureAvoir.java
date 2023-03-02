@@ -32,11 +32,6 @@ public class FactureAvoir implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "factureAvoir")
     private List<ItemFactureAvoir> items;
 
-   /* @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "factureAvoir", updatable = false)
-    private Devise devisee;
-
-    */
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "factureAvoir")
     private List<Paiement> paiements;

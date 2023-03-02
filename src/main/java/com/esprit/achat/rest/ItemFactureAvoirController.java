@@ -1,15 +1,12 @@
 package com.esprit.achat.rest;
 
-import com.esprit.achat.persistence.entity.ItemFacture;
+
+import com.esprit.achat.persistence.entity.FactureAvoir;
 import com.esprit.achat.persistence.entity.ItemFactureAvoir;
-import com.esprit.achat.persistence.entity.OffreProduit;
-import com.esprit.achat.persistence.entity.OffreService;
+import com.esprit.achat.services.Interface.FactureavoirService;
 import com.esprit.achat.services.Interface.ItemFactureAvoirService;
-import com.esprit.achat.services.Interface.ItemFactureService;
-import com.esprit.achat.services.Interface.OffrePService;
-import com.esprit.achat.services.Interface.OffreSService;
+
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +14,11 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/itemfactureavoir")
-@PreAuthorize("hasRole('Fournisseur')")
 @AllArgsConstructor
 public class ItemFactureAvoirController {
     private ItemFactureAvoirService itemFactureAvoirService;
-    private OffrePService offrePService;
-    private OffreSService offreSService;
+    private FactureavoirService factureavoirService;
+
 
     @GetMapping
     List<ItemFactureAvoir> retrieveAll() {
@@ -31,11 +27,12 @@ public class ItemFactureAvoirController {
 
     @PostMapping("/add")
     void add(@RequestBody ItemFactureAvoir i) {
-        if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())) {
-            OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
-            OffreService offreService = offreSService.retrieve(i.getOffreService().getId());
-            i.setOffreProduit(offreProduit);
-            i.setOffreService(offreService);
+        if(Objects.nonNull(i.getFactureAvoir()) && Objects.nonNull(i.getFactureAvoir().getId())) {
+
+            FactureAvoir factureAvoir = factureavoirService.retrieve(i.getFactureAvoir().getId());
+
+            i.setFactureAvoir(factureAvoir);
+
         }
         itemFactureAvoirService.add(i);
     }

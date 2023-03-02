@@ -4,7 +4,6 @@ package com.esprit.achat.services.Implementation;
 import com.esprit.achat.persistence.entity.Facture;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.List;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -43,41 +42,6 @@ public class PDFGeneratorService {
         document.add(table);
         document.close();
     }
-/*
-        private void writeFactureData(PdfPTable table, Facture facture) {
-            table.addCell(String.valueOf(facture.getId()));
-            table.addCell(String.valueOf(facture.getTotalttc()));
-            table.addCell(String.valueOf(facture.getPaiements()));
-            table.addCell(String.valueOf(facture.getDatefacture()));
-            table.addCell(facture.getClient());
-            table.addCell (facture.getAdresseclient()) ;
-            table.addCell (facture.getDevise()) ;
-        }
-
-     private void writeFactureHeader (PdfPTable table) {
-            PdfPCell cell = new PdfPCell();
-            cell.setBackgroundColor(Color.ORANGE);
-            cell.setPadding(7);
-            Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-            font.setColor(Color.WHITE);
-            cell.setPhrase( new Phrase("ID", font));
-            table.addCell(cell);
-            cell.setPhrase( new Phrase("Total", font));
-            table.addCell(cell);
-            cell.setPhrase( new Phrase("Paiement", font));
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("DateFacture ", font));
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("Client ", font));
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("Adresse Client ", font));
-            table.addCell(cell);
-            cell.setPhrase(new Phrase("Devise ", font));
-            table.addCell(cell);
-
-        }
-
- */
 private void writeFactureHeader(PdfPTable table, Facture facture) {
     Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
     font.setColor(Color.WHITE);

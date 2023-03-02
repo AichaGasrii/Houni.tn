@@ -1,6 +1,6 @@
 package com.esprit.achat.persistence.entity;
 
-import com.esprit.achat.persistence.enumeration.ECharge;
+
 import com.esprit.achat.persistence.enumeration.Etat;
 import lombok.*;
 
@@ -41,8 +41,5 @@ public class Commande implements Serializable {
 
     @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Facture facture;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "commande")
-    private List<Reclamation> reclamations;
 
 }

@@ -4,24 +4,18 @@ import com.esprit.achat.persistence.dto.MontantPanier;
 import com.esprit.achat.persistence.dto.Panier;
 import com.esprit.achat.persistence.entity.Commande;
 import com.esprit.achat.persistence.entity.Facture;
-import com.esprit.achat.persistence.entity.Question;
 import com.esprit.achat.persistence.enumeration.Etat;
 import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.FactureService;
-import com.esprit.achat.services.Interface.ItemCommandeService;
-import com.esprit.achat.services.Interface.QuestionService;
 import lombok.AllArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("/commande")
-@PreAuthorize("hasRole('Operateur')")
 @AllArgsConstructor
 public class CommandeController {
 

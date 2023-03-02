@@ -38,9 +38,5 @@ public class ItemFactureAvoir implements Serializable {
     private Double montantHt;
     @Column(name = "MONTANT_TTC")
     private Double montantTtc;
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private OffreProduit offreProduit;
 
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private OffreService offreService;
 }

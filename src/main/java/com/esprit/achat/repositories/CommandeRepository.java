@@ -1,8 +1,7 @@
 package com.esprit.achat.repositories;
 
-import com.esprit.achat.persistence.entity.CodePromo;
+
 import com.esprit.achat.persistence.entity.Commande;
-import com.esprit.achat.persistence.entity.Question;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;

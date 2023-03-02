@@ -3,7 +3,6 @@ package com.esprit.achat.rest;
 import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,12 +10,9 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/itemfacture")
-@PreAuthorize("hasRole('Fournisseur')")
 @AllArgsConstructor
 public class ItemFactureController {
     private ItemFactureService itemFactureService;
-    private OffrePService offrePService;
-    private OffreSService offreSService;
     private FactureService factureService;
 
     @GetMapping
@@ -26,12 +22,10 @@ public class ItemFactureController {
 
     @PostMapping("/add")
     void add(@RequestBody ItemFacture i){
-        if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())  &&  Objects.nonNull(i.getFacture()) && Objects.nonNull(i.getFacture().getId())) {
-            OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
-            OffreService offreService = offreSService.retrieve(i.getOffreService().getId());
+        if(Objects.nonNull(i.getFacture()) && Objects.nonNull(i.getFacture().getId())) {
+
             Facture facture = factureService.retrieve(i.getFacture().getId());
-            i.setOffreProduit(offreProduit);
-            i.setOffreService(offreService);
+
             i.setFacture(facture);
 
         }
