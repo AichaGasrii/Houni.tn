@@ -3,6 +3,7 @@ package com.esprit.achat.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.io.Serializable;
 @Entity
 @Table(name = "codepromo")
@@ -18,5 +19,6 @@ public class CodePromo implements Serializable {
     protected Integer id;
     @Column(name = "code", nullable = false, unique = true)
     private String code;
+    @Max(99)
     private Double remise;
 }

@@ -8,5 +8,4 @@ public interface NatureArticleService extends CrudService<NatureArticle, Integer
 
     public String obtenirUnitePourNatureArticle(NatureArticle natureArticle);
 
-    void affecteroffreproduitANatureArticle(OffreProduit o, int idNatureArticle);
 }

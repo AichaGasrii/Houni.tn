@@ -9,6 +9,7 @@ import com.esprit.achat.services.Interface.ItemFactureService;
 import com.esprit.achat.services.Interface.OffrePService;
 import com.esprit.achat.services.Interface.OffreSService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +54,11 @@ public class ItemFactureAvoirController {
     @GetMapping("/{id}")
     ItemFactureAvoir retrieve(@PathVariable("id") Integer id) {
         return itemFactureAvoirService.retrieve(id);
+    }
+
+    @PostMapping("/calculate-tva")
+    public ResponseEntity<String> calculateTva() {
+        itemFactureAvoirService.affecterTVAAuxItems();
+        return ResponseEntity.ok("TVA affectée avec succès");
     }
 }

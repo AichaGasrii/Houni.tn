@@ -1,7 +1,6 @@
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\FileImageUploadController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\UploadFileService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\ItemCommande.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\DeviseController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\FactureavoirServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\LocationService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\JwtRequest.java
@@ -9,7 +8,9 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rep
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\ReclamationRepositoryMy.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\OffreServiceController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\ReclamationServiceIMP.java
+C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\dto\ValidCountry.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\AppelOffreController.java
+C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\dto\AdressValidator.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\ReponseServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\Configuration\CorsConfiguration.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\FactureController.java
@@ -24,7 +25,6 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\per
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\FactureRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\NatureArticleRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Reaction.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\ImpotController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\OffreService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\OffrePServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\CommandeServiceIMP.java
@@ -36,7 +36,6 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\res
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\OffreProduitController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\LocationController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\OffreProduit.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\ImpotRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\DemandeAchatService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\QuestionController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\util\HelperClass.java
@@ -50,7 +49,6 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rep
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\PaiementService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\UploadFileServiceImpl.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\ReponseService.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\ImpotServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\AppelOffre.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Reponse.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\FactureService.java
@@ -83,13 +81,14 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\per
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\CommandeController.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\QuesionRepositoryMy.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\OffreServiceRepository.java
+C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\dto\CountryValidator.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\ItemFactureServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\CodePromoService.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\ImpotService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Departement.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Rating.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\dto\Panier.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\ItemCommandeService.java
+C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\dto\ValidAdress.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\CrudRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\RoleService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\RatingController.java
@@ -114,14 +113,12 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\per
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\PDFGeneratorService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\RatingServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\FactureServiceIMP.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\DeviseRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\AutreChargeServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\DemandeAchatReporitory.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\Configuration\JwtAuthenticationEntryPoint.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\AppelOffreService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\FactureAvoir.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\NatureArticleController.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\DeviseService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\enumeration\Etat.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\enumeration\ReclamationType.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\CodePromo.java
@@ -135,7 +132,6 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\asp
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\mail\MailConfiguration.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Paiement.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\ReponseRepositoryMy.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\DeviseServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\dto\MontantPanier.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\AdresseRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\FactureAvoirRepository.java
@@ -147,9 +143,7 @@ C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\res
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Interface\ItemFactureService.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\PaiementServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\rest\AdresseController.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Impot.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Reclamation.java
-C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\persistence\entity\Devise.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\ItemFactureAvoirRepository.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\services\Implementation\DemandeAchatServiceIMP.java
 C:\Centrale-d-achat-P-I4-me-int-gr-avecmetier\src\main\java\com\esprit\achat\repositories\ItemFactureRepository.java

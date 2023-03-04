@@ -1,9 +1,6 @@
 package com.esprit.achat.rest;
 
-import com.esprit.achat.persistence.entity.Devise;
 import com.esprit.achat.persistence.entity.FactureAvoir;
-import com.esprit.achat.services.Interface.DeviseService;
-import com.esprit.achat.services.Interface.FactureService;
 import com.esprit.achat.services.Interface.FactureavoirService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

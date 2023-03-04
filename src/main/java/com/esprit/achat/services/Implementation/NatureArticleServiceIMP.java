@@ -45,12 +45,5 @@ public class NatureArticleServiceIMP extends CrudServiceIMP<NatureArticle,Intege
         }
     }
 
-    @Override
-    public void affecteroffreproduitANatureArticle(OffreProduit o, int idNatureArticle){
-        //offreproduit child w nature article master
-        // On affecte le child au master
-        NatureArticle n =natureArticleRepository.findById(idNatureArticle).get();
-        n.getOffreProduit().getId();
-        natureArticleRepository.save(n);
-    }
+
 }

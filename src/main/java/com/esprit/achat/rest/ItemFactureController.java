@@ -3,6 +3,7 @@ package com.esprit.achat.rest;
 import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +54,11 @@ public class ItemFactureController {
     @GetMapping("/{id}")
     ItemFacture retrieve(@PathVariable("id") Integer id){
         return itemFactureService.retrieve(id);
+    }
+
+    @PostMapping("/calculate-tva")
+    public ResponseEntity<String> calculateTva() {
+        itemFactureService.affecterTVAAuxItems();
+        return ResponseEntity.ok("TVA affectée avec succès");
     }
 }

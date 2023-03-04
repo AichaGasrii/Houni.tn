@@ -37,12 +37,6 @@ public class NatureArticleController {
 
         natureArticleService.add(n);
     }
-
-    @PutMapping("affecteroffreproduitANatureArticle/{idNatureArticle}")
-    void affecteroffreproduitANatureArticle(@RequestBody OffreProduit o, @PathVariable int idNatureArticle) {
-        natureArticleService.affecteroffreproduitANatureArticle(o,idNatureArticle);
-    }
-
     @PutMapping("/edit")
     void update(@RequestBody  NatureArticle n){
         natureArticleService.update(n);

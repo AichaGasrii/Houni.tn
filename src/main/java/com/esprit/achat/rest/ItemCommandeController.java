@@ -3,6 +3,7 @@ package com.esprit.achat.rest;
 import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/itemcommande")
-@PreAuthorize("hasRole('User')")
+@PreAuthorize("hasRole('Operateur')")
 @AllArgsConstructor
 public class ItemCommandeController {
     private ItemCommandeService itemCommandeService;
@@ -53,5 +54,11 @@ public class ItemCommandeController {
     @GetMapping("/{id}")
     ItemCommande retrieve(@PathVariable("id") Integer id) {
         return itemCommandeService.retrieve(id);
+    }
+
+    @PostMapping("/calculate-tva")
+    public ResponseEntity<String> calculateTva() {
+        itemCommandeService.affecterTVAAuxItems();
+        return ResponseEntity.ok("TVA affectée avec succès");
     }
 }

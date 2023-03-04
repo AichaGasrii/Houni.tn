@@ -1,10 +1,10 @@
 package com.esprit.achat.rest;
 
-import com.esprit.achat.persistence.entity.Devise;
 import com.esprit.achat.persistence.entity.Facture;
-import com.esprit.achat.services.Interface.DeviseService;
+import com.esprit.achat.persistence.entity.NatureArticle;
 import com.esprit.achat.services.Interface.FactureService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
