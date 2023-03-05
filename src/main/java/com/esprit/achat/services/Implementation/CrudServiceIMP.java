@@ -7,7 +7,6 @@ import java.util.List;
 
 
 public class CrudServiceIMP<T,ID> implements CrudService<T,ID> {
-
     @Autowired
     public CrudRepository<T,ID> crudRepository;
 
@@ -63,6 +62,8 @@ public class CrudServiceIMP<T,ID> implements CrudService<T,ID> {
     }
 
 }
+
+
 
 
 

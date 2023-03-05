@@ -13,12 +13,14 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.time.Instant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @Slf4j
@@ -27,6 +29,18 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
     CodePromoRepository codePromoRepository;
     @Autowired
     CommandeRepository commandeRepository;
+
+    @Override
+    public Double  calculermontantTTC(Commande commande) {
+        Double totalttc =0.0;
+
+        // Calcul total ttc de chaque montant ttc de items
+       for (ItemCommande itemCommande : commande.getItems()){
+           totalttc +=  itemCommande.getMontantTtc();
+       }
+
+        return totalttc;
+    }
 
     public MontantPanier calculMontantPanier(Panier panier) {
         //calcule du panier = quantity*montantHt
@@ -76,32 +90,70 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
         }
 
         return nbr;
-    } /*
+    }
 
-    // Planifie une tâche pour changer l'état des commandes créées il y a plus de 24 heures
+
+    @Override
+    public String obtenirDevisePourCommande(Commande commande) {
+        if (commande == null) {
+            return "devise introuvable";
+        }
+        String adresse = commande.getAdresseclient().trim().toLowerCase();
+        switch (adresse) {
+            case "tunisie":
+                return "TND";
+            case "usa":
+            case "canada":
+                return "USD";
+            case "france":
+            case "belgique":
+                return "EUR";
+            case "uk":
+                return "GBP";
+            default:
+                return "devise introuvable";
+        }
+    }
+    @Override
+    public void affecterDeviseAuxCommandes() {
+        List<Commande> commandes = commandeRepository.findAll();
+        for (Commande commande : commandes) {
+            String devise = obtenirDevisePourCommande(commande);
+            commande.setDevise(devise);
+        }
+        commandeRepository.saveAll(commandes);
+    }
+    private static final Logger logger = LoggerFactory.getLogger(Commande.class);
+
     @PostConstruct
     public void scheduleCommandeStatusUpdate() {
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        LocalDateTime now = LocalDateTime.now();
-        long initialDelay = Duration.between(now, now.plusDays(1).withHour(0).withMinute(0).withSecond(0)).getSeconds();
-        executorService.scheduleAtFixedRate(() -> {
-            System.out.println("La tâche est en cours d'exécution...");
-            // Récupère la liste des commandes en cours
-            List<Commande> commandes = commandeRepository.findByEtat(Etat.ENCOURS);
-            Instant now1 = Instant.now();
-            for (Commande commande : commandes) {
-                // Vérifie si la commande a été créée il y a plus de 24 heures
-                if (Duration.between(commande.getDateCreation().toInstant().atZone(ZoneId.systemDefault()).toInstant(), now1.atZone(ZoneId.systemDefault()).toInstant()).toHours() >= 24) {
-                    // Change l'état de la commande en "validé"
-                    commande.setEtat(Etat.VALIDE);
-                    commandeRepository.save(commande);
+        logger.info("scheduleCommandeStatusUpdate() method called");
+        try {
+            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+            LocalDateTime now = LocalDateTime.now();
+            long initialDelay = Duration.between(now, now.plusMinutes(1)).getSeconds();
+            executorService.scheduleAtFixedRate(() -> {
+                System.out.println("La tâche est en cours d'exécution...");
+                // Récupère la liste des commandes en cours
+                List<Commande> commandes = commandeRepository.findByEtat(Etat.ENCOURS);
+                Instant now1 = Instant.now();
+                for (Commande commande : commandes) {
+                    // Vérifie si la commande a été créée il y a plus de 1 minute
+                    if (Duration.between(commande.getDateCreation().toInstant(), now1).toMinutes() >= 1) {
+                        // Change l'état de la commande en "validé"
+                        commande.setEtat(Etat.VALIDE);
+                        commandeRepository.save(commande);
+                        System.out.println("Commande " + commande.getId() + " mise à jour : " + commande.getEtat());
+                    }
                 }
-            }
-        }, initialDelay, 24 * 60 * 60, TimeUnit.SECONDS);
+            }, initialDelay, 1, TimeUnit.MINUTES);
+        } catch (Exception e) {
+            System.out.println("Une erreur s'est produite lors de l'exécution de la tâche : " + e.getMessage());
+        }
     }
-    */
-
-
 
 }
+
+
+
 

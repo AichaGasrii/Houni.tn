@@ -42,51 +42,34 @@ public class PDFGeneratorService {
         document.add(table);
         document.close();
     }
-private void writeFactureHeader(PdfPTable table, Facture facture) {
-    Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-    font.setColor(Color.WHITE);
-    PdfPCell cellTitle = new PdfPCell();
-    cellTitle.setBackgroundColor(Color.PINK);
-    cellTitle.setPadding(7);
-    cellTitle.setPhrase(new Phrase("Titre", font));
-    table.addCell(cellTitle);
-    PdfPCell cellValue = new PdfPCell();
-    cellValue.setBackgroundColor(Color.GRAY);
-    cellValue.setPadding(7);
-    cellValue.setPhrase(new Phrase("Valeur", font));
-    table.addCell(cellValue);
-    table.setHeaderRows(1);
+    private void writeFactureHeader(PdfPTable table, Facture facture) {
+        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font.setColor(Color.WHITE);
+        PdfPCell cellTitle = new PdfPCell();
+        cellTitle.setBackgroundColor(Color.PINK);
+        cellTitle.setPadding(7);
+        cellTitle.setPhrase(new Phrase("Titre", font));
+        table.addCell(cellTitle);
+        PdfPCell cellValue = new PdfPCell();
+        cellValue.setBackgroundColor(Color.GRAY);
+        cellValue.setPadding(7);
+        cellValue.setPhrase(new Phrase("Valeur", font));
+        table.addCell(cellValue);
+        table.setHeaderRows(1);
 
-   /* table.addCell("ID");
-    table.addCell(facture.getId().toString());
-
-    */
-    table.addCell("DateFacture");
-    table.addCell(facture.getDatefacture().toString());
-    table.addCell("Client");
-    table.addCell(facture.getClient());
-    table.addCell("Adresse Client");
-    table.addCell(facture.getAdresseclient());
-    table.addCell("TotalTTC");
-    table.addCell(facture.getTotalttc().toString());
-    table.addCell("TotalTVA");
-    table.addCell(facture.getTotaltva().toString());
-    table.addCell("Total Avec Remise");
-    table.addCell(facture.getTotalremise().toString());
-    table.addCell("Devise");
-    table.addCell(facture.getDevise());
-}
-
-
-
-
-
-
-
-
-
-
-
+        table.addCell("ID");
+        table.addCell(facture.getId().toString());
+        table.addCell("DateFacture");
+        table.addCell(facture.getDatefacture().toString());
+        table.addCell("Client");
+        table.addCell(facture.getClient());
+        table.addCell("Adresse Client");
+        table.addCell(facture.getAdresseclient());
+        table.addCell("TotalTTC");
+        table.addCell(facture.getTotalttc().toString());
+        table.addCell("Devise");
+        table.addCell(facture.getDevise());
+    }
 
 }
 

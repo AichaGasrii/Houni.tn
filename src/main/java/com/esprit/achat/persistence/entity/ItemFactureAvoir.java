@@ -1,6 +1,8 @@
 package com.esprit.achat.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +14,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties({"factureAvoir"})
 public class ItemFactureAvoir implements Serializable {
     //  -------------------salma-------------------role:fournisseur
     @Id
@@ -28,7 +32,7 @@ public class ItemFactureAvoir implements Serializable {
     @Column(name = "QUANTITY", nullable = false)
     private Double quantity;
 
-    @Column(name = "TVA", nullable = false)
+  //  @Column(name = "TVA", nullable = false)
     private Double tva;
 
     @Column(name = "PRICE_HT", nullable = false)
@@ -70,9 +74,9 @@ public class ItemFactureAvoir implements Serializable {
         this.montantTtc = this.montantHt + (this.montantHt * this.tva / 100);}
     // getters and setters
 
-
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "facture_id", updatable = false)
+    @JoinColumn(name = "factureAvoir_id", updatable = false)
+
     private FactureAvoir factureAvoir;
     @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private OffreProduit offreProduit;

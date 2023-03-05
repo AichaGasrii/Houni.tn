@@ -1,5 +1,6 @@
 package com.esprit.achat.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties({"commande"})
 public class ItemCommande  implements Serializable {
     //  -------------------salma-------------------:role:operateur
 
@@ -31,7 +33,6 @@ public class ItemCommande  implements Serializable {
     @Column(name = "QUANTITY", nullable = false)
     private Double quantity;
 
-   // @Column(name = "TVA", nullable = false)
     private Double tva;
 
     @Column(name = "PRICE_HT", nullable = false)
@@ -73,13 +74,13 @@ public class ItemCommande  implements Serializable {
         this.montantTtc = this.montantHt + (this.montantHt * this.tva / 100);}
         // getters and setters
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "commande_id", updatable = false)
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Commande commande;
-
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private OffreProduit offreProduit;
 
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private OffreService offreService;
 }

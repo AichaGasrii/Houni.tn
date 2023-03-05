@@ -1,6 +1,11 @@
 package com.esprit.achat.rest;
 
+import com.esprit.achat.persistence.dto.ValidCountry;
+import com.esprit.achat.persistence.entity.Facture;
+import com.esprit.achat.persistence.entity.FactureAvoir;
 import com.esprit.achat.persistence.entity.Paiement;
+import com.esprit.achat.services.Interface.FactureService;
+import com.esprit.achat.services.Interface.FactureavoirService;
 import com.esprit.achat.services.Interface.PaiementService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +36,8 @@ import java.util.List;
 public class PaiementController {
 
     private PaiementService paiementService;
+    private FactureService factureService;
+    private FactureavoirService factureAvoirService;
 
     @GetMapping
     List<Paiement> retrieveAll(){
@@ -38,12 +45,20 @@ public class PaiementController {
     }
 
     @PostMapping("/add")
-    void add(@Valid @RequestBody Paiement p){
+    void add(@ValidCountry @RequestBody Paiement p){
+        if(Objects.nonNull(p.getFacture()) && Objects.nonNull(p.getFacture().getId()) && Objects.nonNull(p.getFactureAvoir()) && Objects.nonNull(p.getFactureAvoir().getId()) ) {
+            Facture facture =  factureService.retrieve(p.getFacture().getId());
+            FactureAvoir factureAvoir =  factureAvoirService.retrieve(p.getFactureAvoir().getId());
+            p.setFacture(facture);
+            p.setFactureAvoir(factureAvoir);
+        }
+
+
         paiementService.add(p);
     }
 
     @PutMapping("/edit")
-    void update(@Valid @RequestBody Paiement p){
+    void update(@ValidCountry @RequestBody Paiement p){
         paiementService.update(p);
     }
 

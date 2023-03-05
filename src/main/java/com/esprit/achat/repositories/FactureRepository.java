@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface FactureRepository extends CrudRepository<Facture, Integer>{
 
-    List<Facture> findByArchiveFalse();
-    List<Facture> findByArchiveFalseAndDatefacture(LocalDate datefact);
+    //   List<Facture> findByArchiveFalse();
+    //  List<Facture> findByArchiveFalseAndDateCommande(LocalDate datecmnd);
+
 }

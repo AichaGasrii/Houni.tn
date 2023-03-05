@@ -9,32 +9,34 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PaiementServiceIMP  extends CrudServiceIMP<Paiement,Integer> implements PaiementService {
+public class PaiementServiceIMP extends CrudServiceIMP<Paiement,Integer> implements PaiementService {
+
     @Autowired
     PaiementRepository paiementRepository;
-@Override
+
+    @Override
     public String obtenirDevisePourPaiement(Paiement paiement) {
         if (paiement == null) {
             return "devise introuvable";
         }
         String adresse = paiement.getPays().trim().toLowerCase();
         switch (adresse) {
-            case "Tunisie":
-                return "dt";
-            case "USA":
-            case "Canada":
-                return "dollar";
-            case "France":
-            case "Belgique":
-                return "euro";
-            case "UK":
-                return "pound";
+            case "tunisie":
+                return "TND";
+            case "usa":
+            case "canada":
+                return "USD";
+            case "france":
+            case "belgique":
+                return "EUR";
+            case "uk":
+                return "GBP";
             default:
                 return "devise introuvable";
         }
     }
 
-@Override
+    @Override
     public void affecterDeviseAuxPaiements() {
         List<Paiement> paiements = paiementRepository.findAll();
         for (Paiement paiement : paiements) {

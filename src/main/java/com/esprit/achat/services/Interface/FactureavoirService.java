@@ -8,5 +8,6 @@ import javax.transaction.Transactional;
 
 public interface FactureavoirService extends CrudService<FactureAvoir, Integer> {
 
+    Double  calculermontantTTC(FactureAvoir factureAvoir);
 }
 

@@ -36,6 +36,5 @@ public class ItemCommandeServiceIMP extends CrudServiceIMP<ItemCommande,Integer>
     }
 
 
-
 }
 

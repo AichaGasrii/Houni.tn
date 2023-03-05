@@ -21,17 +21,15 @@ public class ItemCommandeController {
     private OffreSService offreSService;
 
     @GetMapping
-    List<ItemCommande> retrieveAll() {
-        return itemCommandeService.retrieveAll();
-    }
+    List<ItemCommande> retrieveAll() { return itemCommandeService.retrieveAll();}
 
-    @PostMapping("/add")
-    void add(@RequestBody ItemCommande i) {
+    @PostMapping("/add/{commandeId}")
+    void add(@RequestBody ItemCommande i, @PathVariable ("commandeId")Integer commandeId) {
 
-        if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())  &&  Objects.nonNull(i.getCommande()) && Objects.nonNull(i.getCommande().getId())) {
+        if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())) {
             OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
             OffreService offreService = offreSService.retrieve(i.getOffreService().getId());
-            Commande commande = commandeService.retrieve(i.getCommande().getId());
+            Commande commande = commandeService.retrieve(commandeId);
             i.setOffreProduit(offreProduit);
             i.setOffreService(offreService);
             i.setCommande(commande);
@@ -40,7 +38,6 @@ public class ItemCommandeController {
 
         itemCommandeService.add(i);
     }
-
     @PutMapping("/edit")
     void update(@RequestBody ItemCommande i) {
         itemCommandeService.update(i);

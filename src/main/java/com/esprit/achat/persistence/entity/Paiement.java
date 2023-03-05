@@ -1,6 +1,7 @@
 package com.esprit.achat.persistence.entity;
 
 import com.esprit.achat.persistence.dto.ValidCountry;
+import com.esprit.achat.persistence.enumeration.Methode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,20 +39,20 @@ public class Paiement implements Serializable {
     @Pattern(regexp = "[A-Z][a-zA-Z ]*", message = "Le pays doit être une chaîne de caractères commençant par une lettre majuscule suivie de lettres minuscules ou d'espaces")
     private String pays;
 
-    @NotBlank(message = "La devise ne peut pas être vide")
+//    @NotBlank(message = "La devise ne peut pas être vide")
     private String devise;
 
-    @NotBlank(message = "La méthode ne peut pas être vide")
-    private String methode;
+    @Enumerated(EnumType.STRING)
+    private Methode methode;
 
     @NotBlank(message = "La description ne peut pas être vide")
     private String description;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-      @JoinColumn(name = "facture_id", updatable = false)
     private Facture facture;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "paiement", updatable = false)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private FactureAvoir factureAvoir;
+
+
 }

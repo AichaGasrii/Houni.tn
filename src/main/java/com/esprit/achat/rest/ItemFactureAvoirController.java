@@ -1,13 +1,7 @@
 package com.esprit.achat.rest;
 
-import com.esprit.achat.persistence.entity.ItemFacture;
-import com.esprit.achat.persistence.entity.ItemFactureAvoir;
-import com.esprit.achat.persistence.entity.OffreProduit;
-import com.esprit.achat.persistence.entity.OffreService;
-import com.esprit.achat.services.Interface.ItemFactureAvoirService;
-import com.esprit.achat.services.Interface.ItemFactureService;
-import com.esprit.achat.services.Interface.OffrePService;
-import com.esprit.achat.services.Interface.OffreSService;
+import com.esprit.achat.persistence.entity.*;
+import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,19 +18,22 @@ public class ItemFactureAvoirController {
     private ItemFactureAvoirService itemFactureAvoirService;
     private OffrePService offrePService;
     private OffreSService offreSService;
+    private FactureavoirService factureavoirService;
 
     @GetMapping
     List<ItemFactureAvoir> retrieveAll() {
         return itemFactureAvoirService.retrieveAll();
     }
 
-    @PostMapping("/add")
-    void add(@RequestBody ItemFactureAvoir i) {
+    @PostMapping("/add/{factureAvoirId}")
+    void add(@RequestBody ItemFactureAvoir i, @PathVariable ("factureAvoirId") Integer factureAvoirId) {
         if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())) {
             OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
             OffreService offreService = offreSService.retrieve(i.getOffreService().getId());
+            FactureAvoir factureAvoir = factureavoirService.retrieve(factureAvoirId);
             i.setOffreProduit(offreProduit);
             i.setOffreService(offreService);
+            i.setFactureAvoir(factureAvoir);
         }
         itemFactureAvoirService.add(i);
     }

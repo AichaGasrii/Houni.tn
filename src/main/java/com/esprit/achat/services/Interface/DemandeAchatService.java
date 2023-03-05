@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 public interface DemandeAchatService extends CrudService<DemandeAchat, Integer>{
 
-    void nbreAchatParType();
+   // void nbreAchatParType();
 
 
 }

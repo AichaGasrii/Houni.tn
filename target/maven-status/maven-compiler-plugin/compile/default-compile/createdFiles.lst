@@ -141,7 +141,6 @@ com\esprit\achat\persistence\entity\FactureAvoir.class
 com\esprit\achat\persistence\enumeration\MotInterdit.class
 com\esprit\achat\repositories\FactureAvoirRepository.class
 com\esprit\achat\rest\ReponseController.class
-com\esprit\achat\util\HelperClass.class
 com\esprit\achat\rest\JwtController.class
 com\esprit\achat\rest\OffreProduitController.class
 com\esprit\achat\services\Implementation\ItemFactureAvoirServiceIMP.class

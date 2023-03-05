@@ -1,6 +1,7 @@
 package com.esprit.achat.persistence.entity;
 
 import com.esprit.achat.persistence.dto.ValidAdress;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,9 +10,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.io.Serializable;
-import java.time.LocalDate;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @Entity
 @Table(name = "facture")
@@ -36,22 +39,14 @@ public class Facture implements Serializable {
     private String devise;
     @NotNull(message = "Le champ datefacture ne peut pas être vide")
     @PastOrPresent(message = "La date de la facture doit être dans le passé ou le présent")
-    private LocalDate datefacture;
-    @NotNull(message = "Le champ prixht ne peut pas être vide")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Le prix HT doit être supérieur à 0")
-    private Double prixht;
-    @DecimalMin(value = "0.0", message = "Le total de remise doit être supérieur ou égal à 0")
-    private Double totalremise;
-    @DecimalMin(value = "0.0", message = "Le total de TVA doit être supérieur ou égal à 0")
-    private Double totaltva;
-    @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
+    @Temporal(TemporalType.DATE)
+    private Date datefacture;
+   // @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
     private Double totalttc;
-    private Boolean archive;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "facture")
-   private List<ItemFacture> items;
 
-    @OneToOne(mappedBy = "facture")
-    private Commande commande;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "facture_id")
+   private List<ItemFacture> items = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "facture")
     private List<Paiement> paiements;

@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 public interface FactureService extends CrudService<Facture, Integer> {
 
-    @Transactional
-    void archiveExpiredFacture();
+    Double  calculermontantTTC(Facture facture);
 }
 

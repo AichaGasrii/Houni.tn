@@ -25,19 +25,16 @@ public class ItemFactureController {
         return itemFactureService.retrieveAll();
     }
 
-    @PostMapping("/add")
-    void add(@RequestBody ItemFacture i){
-        if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())  &&  Objects.nonNull(i.getFacture()) && Objects.nonNull(i.getFacture().getId())) {
+    @PostMapping("/add/{factureId}")
+    void add(@RequestBody ItemFacture i, @PathVariable ("factureId") Integer factureId) {
+        if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())) {
             OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
             OffreService offreService = offreSService.retrieve(i.getOffreService().getId());
-            Facture facture = factureService.retrieve(i.getFacture().getId());
+            Facture facture = factureService.retrieve(factureId);
             i.setOffreProduit(offreProduit);
             i.setOffreService(offreService);
             i.setFacture(facture);
-
         }
-
-
         itemFactureService.add(i);
     }
 

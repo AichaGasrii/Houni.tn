@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.*;
@@ -37,6 +38,8 @@ public class Commande implements Serializable {
     @Pattern(regexp = "[0-9]{8}", message = "Le CIN doit être composé de 8 chiffres")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String clientcin;
+    @NotBlank(message = "ce champ ne doit pas être vide")
+    private String client;
 
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String reponsableclient;
@@ -50,27 +53,27 @@ public class Commande implements Serializable {
 
     @NotNull(message = "Le champ datefacture ne peut pas être vide")
     @PastOrPresent(message = "La date de la commande doit être dans le passé ou le présent")
-    @CreationTimestamp
     @Column(name = "date_creation")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateCreation;
-
-
-    @NotNull(message = "Le champ prixht ne peut pas être vide")
+   /* @NotNull(message = "Le champ prixht ne peut pas être vide")
     @DecimalMin(value = "0.0", inclusive = false, message = "Le prix HT doit être supérieur à 0")
     private Double prixht;
     @DecimalMin(value = "0.0", message = "Le total de remise doit être supérieur ou égal à 0")
     private Double totalremise;
     @DecimalMin(value = "0.0", message = "Le total de TVA doit être supérieur ou égal à 0")
     private Double totaltva;
-    @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
-    private Double totalttc;
 
+    */
+  //  @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
+    private Double totalttc;
+    private Boolean archive;
     @Enumerated(EnumType.STRING)
     private Etat etat;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "commande")
-    private List<ItemCommande> items;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "commande_id")
+    private List<ItemCommande> items = new ArrayList<>();
     @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Facture facture;
 
