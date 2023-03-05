@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Centrale-d-achat-P-I4-me-int-gr-avecmetier" />
+        <module name="Module Offre" />
+        <module name="achat" />
+        <module name="Centrale-d-achat-P-I4-me-dev" />
+        <module name="Module-Offre" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Centrale-d-achat-P-I4-me-dev" options="-parameters" />
+      <module name="Centrale-d-achat-P-I4-me-int-gr-avecmetier" options="-parameters" />
+      <module name="Module Offre" options="-parameters" />
+      <module name="Module-Offre" options="-parameters" />
+      <module name="achat" options="-parameters" />
+    </option>
+  </component>
+</project>
