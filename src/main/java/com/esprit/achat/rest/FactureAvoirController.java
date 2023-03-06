@@ -50,7 +50,7 @@ public class FactureAvoirController {
     public FactureAvoir calculermontantTTC(@PathVariable ("factureAvoirId") Integer factureAvoirId){
         factureavoirService.retrieve(factureAvoirId);
         FactureAvoir factureAvoir = factureavoirService.retrieve(factureAvoirId);
-        factureAvoir.setRemboursement(factureavoirService.calculermontantTTC(factureAvoir));
+        factureAvoir.setTotalttc(factureavoirService.calculermontantTTC(factureAvoir));
         return factureAvoirRepository.save(factureAvoir);
     }
 

@@ -9,10 +9,13 @@ import com.esprit.achat.repositories.CommandeRepository;
 import com.esprit.achat.services.Interface.CommandeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -35,6 +38,7 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
         Double totalttc =0.0;
 
         // Calcul total ttc de chaque montant ttc de items
+        commande.getItems().size();
        for (ItemCommande itemCommande : commande.getItems()){
            totalttc +=  itemCommande.getMontantTtc();
        }
@@ -125,32 +129,21 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
     }
     private static final Logger logger = LoggerFactory.getLogger(Commande.class);
 
-    @PostConstruct
-    public void scheduleCommandeStatusUpdate() {
-        logger.info("scheduleCommandeStatusUpdate() method called");
-        try {
-            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-            LocalDateTime now = LocalDateTime.now();
-            long initialDelay = Duration.between(now, now.plusMinutes(1)).getSeconds();
-            executorService.scheduleAtFixedRate(() -> {
-                System.out.println("La tâche est en cours d'exécution...");
-                // Récupère la liste des commandes en cours
-                List<Commande> commandes = commandeRepository.findByEtat(Etat.ENCOURS);
-                Instant now1 = Instant.now();
-                for (Commande commande : commandes) {
-                    // Vérifie si la commande a été créée il y a plus de 1 minute
-                    if (Duration.between(commande.getDateCreation().toInstant(), now1).toMinutes() >= 1) {
-                        // Change l'état de la commande en "validé"
-                        commande.setEtat(Etat.VALIDE);
-                        commandeRepository.save(commande);
-                        System.out.println("Commande " + commande.getId() + " mise à jour : " + commande.getEtat());
-                    }
-                }
-            }, initialDelay, 1, TimeUnit.MINUTES);
-        } catch (Exception e) {
-            System.out.println("Une erreur s'est produite lors de l'exécution de la tâche : " + e.getMessage());
-        }
+    @Override
+    public List<ItemCommande> listeDesItemParCommande(Integer commandeId){
+        Commande commande= commandeRepository.findById(commandeId).orElse(null);
+        return commande.getItems();
+
     }
+
+    @Transactional
+    @Override
+    public void archiveExpiredCommande() {
+        commandeRepository.findByArchiveFalseAndDateCreation(LocalDate.now())
+                .stream()
+                .forEach(commande -> commande.setArchive(true));
+    }
+
 
 }
 

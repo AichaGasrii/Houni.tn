@@ -17,6 +17,11 @@ public interface CommandeRepository extends CrudRepository<Commande, Integer>{
 
      List<Commande> findByEtat(Etat etat);
 
+      List<Commande> findByArchiveFalse();
+    List<Commande> findByArchiveFalseAndDateCreation(LocalDate dateCreation);
+
+
+
 
 
 }

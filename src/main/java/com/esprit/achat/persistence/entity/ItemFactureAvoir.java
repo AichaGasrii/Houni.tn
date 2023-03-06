@@ -74,7 +74,7 @@ public class ItemFactureAvoir implements Serializable {
         this.montantTtc = this.montantHt + (this.montantHt * this.tva / 100);}
     // getters and setters
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "factureAvoir_id", updatable = false)
 
     private FactureAvoir factureAvoir;
@@ -83,4 +83,6 @@ public class ItemFactureAvoir implements Serializable {
 
     @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private OffreService offreService;
+
+
 }

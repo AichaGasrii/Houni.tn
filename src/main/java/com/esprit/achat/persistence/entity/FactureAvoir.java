@@ -39,13 +39,9 @@ public class FactureAvoir implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date datefacture;
    // @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
-    private Double remboursement;
+    private Double totalttc;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "factureAvoir_id")
     private List<ItemFactureAvoir> items = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "factureAvoir")
-    private List<Paiement> paiements;
-
-
 
 }

@@ -54,8 +54,8 @@ public class Commande implements Serializable {
     @NotNull(message = "Le champ datefacture ne peut pas être vide")
     @PastOrPresent(message = "La date de la commande doit être dans le passé ou le présent")
     @Column(name = "date_creation")
-    @Temporal(TemporalType.DATE)
-    private Date dateCreation;
+    //@Temporal(TemporalType.DATE)
+    private LocalDate dateCreation;
    /* @NotNull(message = "Le champ prixht ne peut pas être vide")
     @DecimalMin(value = "0.0", inclusive = false, message = "Le prix HT doit être supérieur à 0")
     private Double prixht;
@@ -74,7 +74,7 @@ public class Commande implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "commande_id")
     private List<ItemCommande> items = new ArrayList<>();
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Facture facture;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "commande")

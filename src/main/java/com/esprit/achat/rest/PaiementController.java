@@ -46,16 +46,25 @@ public class PaiementController {
 
     @PostMapping("/add")
     void add(@ValidCountry @RequestBody Paiement p){
-        if(Objects.nonNull(p.getFacture()) && Objects.nonNull(p.getFacture().getId()) && Objects.nonNull(p.getFactureAvoir()) && Objects.nonNull(p.getFactureAvoir().getId()) ) {
+        if(Objects.nonNull(p.getFacture()) && Objects.nonNull(p.getFacture().getId())) {
             Facture facture =  factureService.retrieve(p.getFacture().getId());
-            FactureAvoir factureAvoir =  factureAvoirService.retrieve(p.getFactureAvoir().getId());
             p.setFacture(facture);
-            p.setFactureAvoir(factureAvoir);
         }
 
 
         paiementService.add(p);
     }
+    @PostMapping("/pay/{factureId}")
+    void add(@PathVariable("factureId") Integer factureId, @ValidCountry @RequestBody Paiement p) {
+        Facture facture = factureService.retrieve(factureId);
+        if (facture == null) {
+            throw new IllegalArgumentException("Facture not found with id " + factureId);
+        }
+        p.setFacture(facture);
+        p.setPrix(facture.getTotalttc());
+        paiementService.add(p);
+    }
+
 
     @PutMapping("/edit")
     void update(@ValidCountry @RequestBody Paiement p){

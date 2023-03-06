@@ -31,8 +31,8 @@ public class Paiement implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected Integer id = 0;
-    @NotNull(message = "Le prix ne peut pas être nul")
-    @PositiveOrZero(message = "Le prix doit être positif ou zéro")
+   // @NotNull(message = "Le prix ne peut pas être nul")
+ //   @PositiveOrZero(message = "Le prix doit être positif ou zéro")
     private Double prix;
 
     @ValidCountry
@@ -50,9 +50,5 @@ public class Paiement implements Serializable {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Facture facture;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private FactureAvoir factureAvoir;
-
 
 }

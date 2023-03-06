@@ -1,11 +1,11 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.dto.ValidAdress;
-import com.esprit.achat.persistence.entity.Commande;
-import com.esprit.achat.persistence.entity.Facture;
-import com.esprit.achat.persistence.entity.NatureArticle;
+import com.esprit.achat.persistence.entity.*;
+import com.esprit.achat.persistence.enumeration.Etat;
 import com.esprit.achat.repositories.FactureRepository;
 import com.esprit.achat.services.Interface.FactureService;
+import com.mysql.cj.xdevapi.Client;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,5 +57,13 @@ public class FactureController {
         return factureRepository.save(facture);
     }
 
+    @GetMapping("/nbFactureParClient/{client}")
+    public Integer nbFactureParClient (@PathVariable Client client){
+        return  factureService.nbFactureParClient(client);}
 
+    @GetMapping("/items-facture/{factureId}")
+    @ResponseStatus
+    public List<ItemFacture> listeDesItemParFacture(@PathVariable Integer factureId) {
+        return factureService.listeDesItemParFacture(factureId);
+    }
 }

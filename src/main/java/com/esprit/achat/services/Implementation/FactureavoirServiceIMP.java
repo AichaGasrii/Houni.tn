@@ -11,14 +11,14 @@ public class FactureavoirServiceIMP  extends CrudServiceIMP<FactureAvoir,Integer
 
     @Override
     public Double  calculermontantTTC(FactureAvoir factureAvoir) {
-        Double remboursement =0.0;
+        Double totalttc =0.0;
 
         // Calcul total ttc de chaque montant ttc de items
         for (ItemFactureAvoir itemFactureAvoir : factureAvoir.getItems()){
-            remboursement +=  itemFactureAvoir.getMontantTtc();
+            totalttc +=  itemFactureAvoir.getMontantTtc();
         }
 
-        return remboursement;
+        return totalttc;
     }
 
 

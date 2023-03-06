@@ -68,8 +68,10 @@ public class CommandeController {
     @PutMapping ("/calculermontantTTC/{commandeId}")
     public Commande  calculermontantTTC(@PathVariable ("commandeId") Integer commandeId){
         commandeService.retrieve(commandeId);
-    Commande commande = commandeService.retrieve(commandeId);
+        Commande commande = commandeService.retrieve(commandeId);
         commande.setTotalttc(commandeService.calculermontantTTC(commande));
+
+
         return commandeRepository.save(commande);
     }
     @PreAuthorize("hasRole('Operateur')")
@@ -87,6 +89,11 @@ public class CommandeController {
         commandeService.affecterDeviseAuxCommandes();
         return ResponseEntity.ok().build();
     }
-
+    @PreAuthorize("hasRole('Operateur')")
+    @GetMapping("/items-commande/{commandeId}")
+    @ResponseStatus
+    public List<ItemCommande> listeDesItemParCommande(@PathVariable Integer commandeId) {
+        return commandeService.listeDesItemParCommande(commandeId);
+    }
 
 }

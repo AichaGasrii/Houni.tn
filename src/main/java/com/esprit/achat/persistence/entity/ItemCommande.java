@@ -22,7 +22,7 @@ public class ItemCommande  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    private Integer id;
 
     @Column(name = "CODE", nullable = false, unique = true)
     private String code;
@@ -74,13 +74,14 @@ public class ItemCommande  implements Serializable {
         this.montantTtc = this.montantHt + (this.montantHt * this.tva / 100);}
         // getters and setters
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "commande_id", updatable = false)
-
     private Commande commande;
-    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private OffreProduit offreProduit;
 
     @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private OffreService offreService;
+
+
 }

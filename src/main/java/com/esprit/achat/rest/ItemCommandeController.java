@@ -40,11 +40,27 @@ public class ItemCommandeController {
     }
     @PutMapping("/edit")
     void update(@RequestBody ItemCommande i) {
+
         itemCommandeService.update(i);
     }
 
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id) {
+        ItemCommande itemCommande = itemCommandeService.retrieve(id);
+       /* if (itemCommande == null) {
+            throw new IllegalArgumentException("Invalid item ID: " + id);
+        }
+
+        */
+        Commande commande = itemCommande.getCommande();
+        /*if (commande == null) {
+            throw new IllegalStateException("Item " + id + " is not associated with any commande");
+        }
+
+         */
+        commande.getItems().remove(itemCommande);
+        commandeService.add(commande);
+
         itemCommandeService.remove(id);
     }
 

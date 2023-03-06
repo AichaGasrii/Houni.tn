@@ -45,6 +45,25 @@ public class ItemFactureController {
 
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id){
+
+
+        ItemFacture itemFacture = itemFactureService.retrieve(id);
+       /* if (itemCommande == null) {
+            throw new IllegalArgumentException("Invalid item ID: " + id);
+        }
+
+        */
+        Facture facture = itemFacture.getFacture();
+        /*if (commande == null) {
+            throw new IllegalStateException("Item " + id + " is not associated with any commande");
+        }
+
+         */
+        facture.getItems().remove(itemFacture);
+        factureService.add(facture);
+
+        itemFactureService.remove(id);
+        itemFactureService.remove(id);
         itemFactureService.remove(id);
     }
 

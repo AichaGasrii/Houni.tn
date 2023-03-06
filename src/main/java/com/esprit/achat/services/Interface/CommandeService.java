@@ -7,6 +7,9 @@ import com.esprit.achat.persistence.entity.ItemCommande;
 import com.esprit.achat.persistence.entity.Question;
 import com.esprit.achat.persistence.enumeration.Etat;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 public interface CommandeService extends CrudService<Commande, Integer> {
 
     Double  calculermontantTTC(Commande commande);
@@ -20,5 +23,10 @@ public interface CommandeService extends CrudService<Commande, Integer> {
     String obtenirDevisePourCommande(Commande commande);
 
     void affecterDeviseAuxCommandes();
+
+    List<ItemCommande> listeDesItemParCommande(Integer commandeId);
+
+    @Transactional
+    void archiveExpiredCommande();
 }
 
