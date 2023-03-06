@@ -41,4 +41,7 @@ public class Reclamation implements Serializable {
      @ManyToOne
      private User user;
 
+    @OneToOne(mappedBy = "reclamation")
+    private Livraison livraison;
+
 }

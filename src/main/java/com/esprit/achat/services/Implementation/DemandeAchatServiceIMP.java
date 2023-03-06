@@ -19,6 +19,7 @@ public class DemandeAchatServiceIMP extends CrudServiceIMP<DemandeAchat,Integer>
     @Autowired
     DemandeAchatReporitory demandeAchatReporitory;
 
+
     public void enregistrerAppelOffre(int idDemandeAchat) {
         DemandeAchat demandeAchat = demandeAchatReporitory.findById(idDemandeAchat)
                 .orElseThrow(() -> new IllegalArgumentException("Demande d'achat inexistante avec l'ID : " + idDemandeAchat));
@@ -28,8 +29,8 @@ public class DemandeAchatServiceIMP extends CrudServiceIMP<DemandeAchat,Integer>
 
     }
 
-
-   // @Scheduled(cron = "*/30 * * * * * ")
+    @Override
+    @Scheduled(cron = "*/30 * * * * *")
     public void nbreAchatParType() {
         log.info("--- Nombre des demandes d'achat PRODUIT :" + demandeAchatReporitory.nbreAchatParType(OffreType.PRODUIT));
         log.info("--- Nombre des demandes d'achat SERVICE : " + demandeAchatReporitory.nbreAchatParType(OffreType.SERVICE));

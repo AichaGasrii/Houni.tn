@@ -7,9 +7,16 @@ import org.json.JSONException;
 import java.util.List;
 
 public interface AppelOffreService extends CrudService<AppelOffre, Integer>{
-    public void affecterAppleOffreAOffreProduit(Integer idA, Integer idO);
+
+   // public void affecterAppleOffreAOffreProduit(Integer idA, Integer idO);
 
     void desaffecterAppeloffreNatureArticle(Integer idA);
 
+    double calculerPrixTotal(AppelOffre appelOffre);
+
+    String notif(DemandeAchat demande, AppelOffre offre);
+
     AppelOffre trouverMeilleurMatch(DemandeAchat demande) ;
+
+    String accepterMatch(AppelOffre match);
 }

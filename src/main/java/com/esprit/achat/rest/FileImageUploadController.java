@@ -20,7 +20,7 @@ public class FileImageUploadController {
 		System.out.println(file.getName());
 		System.out.println(file.getContentType());
 		System.out.println(file.getSize());
-		String Path_Directory="C:\\Centrale-d-achat-P-I4-me-int-gr-avecmetier\\src\\main\\resources\\static\\downloadFile";
+		String Path_Directory="C:\\Centrale-d-achat-P-I4-me-int-gr-avecmetier-old\\src\\main\\resources\\static\\downloadFile";
 		Files.copy(file.getInputStream(),Paths.get(Path_Directory+File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 		return "Successfuly Image is Upload";
 	}

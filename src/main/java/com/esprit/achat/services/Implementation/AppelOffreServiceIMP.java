@@ -1,20 +1,14 @@
 package com.esprit.achat.services.Implementation;
 
-import com.esprit.achat.persistence.entity.AppelOffre;
-import com.esprit.achat.persistence.entity.DemandeAchat;
-import com.esprit.achat.persistence.entity.NatureArticle;
-import com.esprit.achat.persistence.entity.OffreProduit;
+import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.repositories.AppelOffreRepository;
 import com.esprit.achat.repositories.OffreProduitRepository;
 import com.esprit.achat.services.Interface.AppelOffreService;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Service
 public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> implements AppelOffreService {
@@ -22,13 +16,8 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
     AppelOffreRepository appelOffreRepository;
     @Autowired
     OffreProduitRepository offreProduitRepository;
-    @Override
-    public void affecterAppleOffreAOffreProduit(Integer idA, Integer idO) {
-        AppelOffre appelOffre = appelOffreRepository.findById(idA).orElse(null);
-        OffreProduit offreProduit = offreProduitRepository.findById(idO).orElse(null);
-        appelOffre.setOffreProduits((List<OffreProduit>) offreProduit);
-        appelOffreRepository.save(appelOffre);
-    }
+
+
 
     @Override
     public void desaffecterAppeloffreNatureArticle( Integer idA) {
@@ -39,8 +28,37 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
         appelOffreRepository.save(appelOffre);
 
     }
+    @Override
+    public double calculerPrixTotal(AppelOffre appelOffre) {
+        double prixTotal = 0.0;
+
+        // Calculer le prix total des offres de produits
+        for (OffreProduit produit : appelOffre.getOffreProduits()) {
+            prixTotal += produit.getQuantite() * produit.getPrixUnitaire();
+        }
+
+        // Calculer le prix total des offres de services
+        for (OffreService service : appelOffre.getOffreServices()) {
+            prixTotal += service.getHeures() * service.getPrixparheure();
+        }
+
+        return prixTotal;
+    }
 
 @Override
+    public String notif(DemandeAchat demande, AppelOffre offre) {
+        String message = "Notification pour la demande d'achat: " + demande.getNom() + ":\n";
+        message += "Le meilleur match est l'appel d'offre: " + offre.getNom() + ":\n";
+        message += "Description : " + offre.getDescription() + "\n";
+        message += "Quantité disponible : " + offre.getQuantiteMin() + "\n";
+        message += "Prix Total : " + offre.getPrixTotal() + "\n";
+    message += "Vous pouvez sois refuser ce match sois l'accepter et passer une commande "  ;
+        // autres informations à inclure dans la notification
+
+        return message;
+    }
+
+    @Override
     public AppelOffre trouverMeilleurMatch(DemandeAchat demande)  {
 
         AppelOffre meilleurMatch = null;
@@ -72,36 +90,28 @@ public class AppelOffreServiceIMP extends CrudServiceIMP<AppelOffre,Integer> imp
         }
 
 
-        // Envoyer une notification  avec le meilleur match trouvé
-       // String message = "Le meilleur match pour la demande d'achat " + demande.getId() + " est l'appel d'offre " + meilleurMatch.getId();
-       // Notif(message);
+        // call the notif method to send the notification
+       notif(demande, meilleurMatch);
 
         return meilleurMatch;
     }
-    /*
 
-    public void Notif(String message) throws JSONException {
-        RestTemplate restTemplate = new RestTemplate();
+@Override
+    public String accepterMatch(AppelOffre match) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Voulez-vous accepter le matching ? (oui ou non)");
+        String reponse = scanner.nextLine();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String url = "https://api.postman.com/v1/messages";
-        String apiKey = "PMAK-63ffbe555bf7502484ece332-afac13d073701843bf753adb14b5fe9d5a";
-
-        JSONObject json = new JSONObject();
-        json.put("text", message);
-
-        HttpEntity<String> entity = new HttpEntity<String>(json.toString(), headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(url + "?apikey=" + apiKey, HttpMethod.POST, entity, String.class);
-        System.out.println(response.getBody());
+        if ("oui".equalsIgnoreCase(reponse)) {
+            match.setAccepte(true);
+            appelOffreRepository.save(match);
+            return "Matching accepté, votre commande sera préparée aux plus brefs délais.";
+        } else {
+            match.setAccepte(false);
+            appelOffreRepository.save(match);
+            return "Matching refusé, nous ferons de notre mieux pour vous trouver le bon matching lors de votre suivante demande d'achat.";
+        }
     }
-
-     */
-
-
-
 
 
 

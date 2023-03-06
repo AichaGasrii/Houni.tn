@@ -1,6 +1,7 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.AppelOffre;
+import com.esprit.achat.persistence.entity.DemandeAchat;
 import com.esprit.achat.persistence.entity.NatureArticle;
 import com.esprit.achat.persistence.entity.OffreProduit;
 import com.esprit.achat.services.Interface.AppelOffreService;
@@ -14,16 +15,21 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Objects;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/offreProduit")
-@PreAuthorize("hasRole('Fournisseur')")
+
 @AllArgsConstructor
 public class OffreProduitController {
 
@@ -34,7 +40,7 @@ public class OffreProduitController {
     List<OffreProduit> retrieveAll(){
         return offreService.retrieveAll();
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @PostMapping("/add")
     void add(@RequestBody OffreProduit o){
 
@@ -45,11 +51,13 @@ public class OffreProduitController {
         offreService.add(o);
     }
 
+
+    @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
     void update(@RequestBody OffreProduit o){
         offreService.update(o);
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id){
         offreService.remove(id);
@@ -60,10 +68,37 @@ public class OffreProduitController {
         return offreService.retrieve(id);
     }
 
-    @GetMapping("/produit-nature/{nature}")
-    public List<OffreProduit> listeDeproduitParNature(@PathVariable("nature") NatureArticle natureArticle) {
-        return offreService.listeDeproduitParNature(natureArticle);
+
+    @PostMapping("/addavecImage")
+    public ResponseEntity<OffreProduit> addOffreProduit(
+            @RequestParam("nom") String nom,
+            @RequestParam("disponibilité") Boolean disponibilité,
+            @RequestParam("quantite") Double quantite,
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("prixUnitaire") Double prixUnitaire,
+            @RequestParam("appelOffreId") Integer appelOffreId){
+
+// récupération de la demande d'achat
+        AppelOffre appelOffre = new AppelOffre();
+        appelOffre.setId(appelOffreId);
+
+        // appel du service pour ajouter l'offre produit
+        OffreProduit savedOffreProduit = offreService.addOffreProduit(nom, disponibilité, quantite, image, prixUnitaire,appelOffre);
+
+        return ResponseEntity.ok(savedOffreProduit);
     }
+
+    @PostMapping("/upload-file")
+    public String uploadImage(@RequestParam("file") MultipartFile file) throws Exception{
+        System.out.println(file.getOriginalFilename());
+        System.out.println(file.getName());
+        System.out.println(file.getContentType());
+        System.out.println(file.getSize());
+        String Path_Directory="C:\\Centrale-d-achat-P-I4-me-dev\\src\\main\\resources\\static\\downloadFile";
+        Files.copy(file.getInputStream(), Paths.get(Path_Directory+ File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+        return "Successfuly Image is Upload";
+    }
+
 
     @GetMapping("/offers/{id}/qrcode")
     public ResponseEntity<byte[]> generateQRCode(@PathVariable int id) throws Exception {

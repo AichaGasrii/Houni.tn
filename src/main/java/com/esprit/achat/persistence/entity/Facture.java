@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.io.Serializable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +42,7 @@ public class Facture implements Serializable {
     @PastOrPresent(message = "La date de la facture doit être dans le passé ou le présent")
     @Temporal(TemporalType.DATE)
     private Date datefacture;
+    private LocalDate dateLivraison;
    // @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
     private Double totalttc;
 
@@ -51,6 +53,12 @@ public class Facture implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "facture")
     private List<Paiement> paiements;
 
+
+    @ManyToOne
+    private Livreur livreur;
+
+    @OneToOne(mappedBy = "facture")
+    private Livraison livraison;
 
 
 

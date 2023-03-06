@@ -23,7 +23,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/offreService")
-@PreAuthorize("hasRole('Fournisseur')")
+
 @AllArgsConstructor
 public class OffreServiceController {
 
@@ -34,7 +34,7 @@ public class OffreServiceController {
     List<OffreService> retrieveAll(){
         return offreService.retrieveAll();
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @PostMapping("/add")
     void add(@RequestBody OffreService o){
         if(Objects.nonNull(o.getAppeloffre()) && Objects.nonNull(o.getAppeloffre().getId()) ) {
@@ -43,12 +43,12 @@ public class OffreServiceController {
         }
         offreService.add(o);
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
     void update(@RequestBody OffreService o){
         offreService.update(o);
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id){
         offreService.remove(id);
@@ -59,6 +59,7 @@ public class OffreServiceController {
     OffreService retrieve(@PathVariable("id") Integer id){
         return offreService.retrieve(id);
     }
+
     @GetMapping("/offers/{id}/qrcode")
     public ResponseEntity<byte[]> generateQRCode(@PathVariable int id) throws Exception {
         // Get the offer data

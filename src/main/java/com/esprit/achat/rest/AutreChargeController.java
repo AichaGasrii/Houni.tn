@@ -1,10 +1,13 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.AutreCharge;
-import com.esprit.achat.persistence.entity.Commande;
+import com.esprit.achat.persistence.entity.DemandeAchat;
 import com.esprit.achat.services.Interface.AutreChargeService;
-import com.esprit.achat.services.Interface.CommandeService;
+import com.esprit.achat.services.Interface.DemandeAchatService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,26 +15,29 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/autreCharge")
-@PreAuthorize("hasRole('User')")
+
 @AllArgsConstructor
 public class AutreChargeController {
-    private AutreChargeService autreChargeService;
+    @Autowired
+    AutreChargeService autreChargeService;
+    @Autowired
+    DemandeAchatService demandeAchatService;
 
     @GetMapping
     List<AutreCharge> retrieveAll(){
         return autreChargeService.retrieveAll();
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @PostMapping("/add")
     void add(@RequestBody AutreCharge c){
         autreChargeService.add(c);
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
     void update(@RequestBody AutreCharge c){
         autreChargeService.update(c);
     }
-
+    @PreAuthorize("hasRole('Fournisseur')")
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id){
         autreChargeService.remove(id);
@@ -40,5 +46,21 @@ public class AutreChargeController {
     @GetMapping("/{id}")
     AutreCharge retrieve(@PathVariable("id") Integer id){
         return autreChargeService.retrieve(id);
+    }
+
+    @GetMapping("/{autreChargeId}/demandeAchats")
+    @ResponseStatus
+    public List<DemandeAchat> getAllDemandesAchatByAutreCharge(@PathVariable Integer autreChargeId) {
+        return autreChargeService.getAllDemandesAchatByAutreCharge(autreChargeId);
+    }
+
+    @GetMapping("/demandes-achat/autre-charge/{eCharge}")
+    public ResponseEntity<?> getDemandesAchatByECharge(@PathVariable String eCharge) {
+        try {
+            List<DemandeAchat> demandes = autreChargeService.getDemandesAchatByECharge(eCharge);
+            return ResponseEntity.ok(demandes);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body("Invalid eCharge value");
+        }
     }
 }

@@ -5,5 +5,5 @@ import com.esprit.achat.services.Interface.AdresseService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdresseServiceIMP extends CrudServiceIMP<Adresse,Integer> implements AdresseService {
+public class AdresseServiceIMP extends CrudServiceIMP<Adresse,Long> implements AdresseService {
 }

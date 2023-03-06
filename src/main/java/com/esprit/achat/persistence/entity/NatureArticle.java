@@ -20,18 +20,23 @@ public class NatureArticle implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
+
+    @Column(name = "secteur", nullable = false, unique = true)
     private String secteur;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
     private String unité;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "natureArticle")
     private List<AppelOffre> appelOffres;
 
 
-    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private OffreProduit offreProduit;
-
+    @OneToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<OffreProduit> offreProduits;
 
 
 

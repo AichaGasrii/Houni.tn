@@ -7,6 +7,7 @@ import java.util.List;
 
 
 public class CrudServiceIMP<T,ID> implements CrudService<T,ID> {
+
     @Autowired
     public CrudRepository<T,ID> crudRepository;
 
@@ -25,7 +26,6 @@ public class CrudServiceIMP<T,ID> implements CrudService<T,ID> {
         try{
             crudRepository.save(t);
         } catch (Exception err) {
-            err.printStackTrace();
             System.out.println("Un erreur est survenue : " + err);
         }
 
@@ -47,7 +47,6 @@ public class CrudServiceIMP<T,ID> implements CrudService<T,ID> {
         try{
             T t = crudRepository.findById(id).orElse(null);
             crudRepository.delete(t);
-            //crudRepository.findAll();
         } catch (Exception err) {
             System.out.println("Un erreur est survenue : " + err);
         }
@@ -64,8 +63,6 @@ public class CrudServiceIMP<T,ID> implements CrudService<T,ID> {
     }
 
 }
-
-
 
 
 
