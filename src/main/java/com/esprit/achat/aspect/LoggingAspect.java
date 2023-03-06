@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Slf4j
 public class LoggingAspect {
-//    @Before("execution( * com.example.SalmaKhemiri.generic.IGenericServiceImp.add*(..))")
+//    @Before("execution( * com.example.AichaGasri.generic.IGenericServiceImp.add*(..))")
     public void logMethodEntry(JoinPoint joinPoint) {
 
         String name = joinPoint.getSignature().getName();

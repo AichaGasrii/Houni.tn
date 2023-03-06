@@ -6,7 +6,6 @@ import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
 import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +14,13 @@ import java.util.Objects;
 @RestController
 
 @RequestMapping("/appelOffre")
-@PreAuthorize("hasRole('Fournisseur')")
 @AllArgsConstructor
 public class AppelOffreController {
     private AppelOffreService appelOffreService;
     private DemandeAchatService demandeAchatService;
     private NatureArticleService natureArticleService;
     private AppelOffreRepository appelOffreRepository;
+
     private OffreSService offreSService;
 
     @GetMapping
@@ -59,76 +58,36 @@ public class AppelOffreController {
         return appelOffreService.retrieve(id);
     }
 
-    @PutMapping(value = "/affecterAppleOffreAOffreProduit/{idA}/{idO}")
-    public void affecterAppleOffreAOffreProduit(@PathVariable int idA, @PathVariable int idO) {
-        appelOffreService.affecterAppleOffreAOffreProduit(idA, idO);
-    }
 
     @GetMapping("/desaffecterAppeloffreNatureArticle/{idA}")
     void desaffecterAppeloffreNatureArticle(@PathVariable Integer idA) {
         appelOffreService.desaffecterAppeloffreNatureArticle(idA);
     }
 
-    @PostMapping("/meilleurMatch/{demande}")
-    public ResponseEntity<AppelOffre> trouverMeilleurMatch(@PathVariable ("demande") DemandeAchat demande){
+    @GetMapping("/meilleurMatch/{demande}")
+    public ResponseEntity<String> trouverMeilleurMatch(@PathVariable ("demande") DemandeAchat demande){
         AppelOffre meilleurMatch = appelOffreService.trouverMeilleurMatch(demande);
 
         if (meilleurMatch == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().body(meilleurMatch);
+
+        String notifMessage = appelOffreService.notif(demande, meilleurMatch);
+
+        return ResponseEntity.ok().body(notifMessage);
     }
 
-    /*@PostMapping("/trouverMeilleurMatch")
-    public ResponseEntity<AppelOffre> trouverMeilleurMatch(@RequestBody DemandeAchat demande) {
+    @PutMapping("/updatePriceAppelOffre/{appelOffre}")
+    public AppelOffre updatePriceAppelOffre(@PathVariable ("appelOffre") AppelOffre appelOffre) {
 
-        AppelOffre meilleurMatch = null;
-        double meilleureNote = 2.0;
-
-        List<AppelOffre> offres = appelOffreRepository.findAll();
-
-        for (AppelOffre offre : offres) {
-            double note = 0.0;
-
-            if (demande.getNom().equals(offre.getNom())) {
-                note += 1.0;
-            }
-
-            if (demande.getQuantiteMin() <= offre.getQuantiteMin()) {
-                note += 1.0;
-            }
-
-            if (demande.getObjet().equals(offre.getObjet())) {
-                note += 1.0;
-            }
-
-            // autres règles de correspondance
-
-            if (note > meilleureNote) {
-                meilleurMatch = offre;
-                meilleureNote = note;
-            }
-        }
-
-        if (meilleurMatch == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok().body(meilleurMatch);
+        appelOffre.setPrixTotal(appelOffreService.calculerPrixTotal(appelOffre));
+        return appelOffreRepository.save(appelOffre);
     }
 
-     */
-   /* @GetMapping("/trouverMeilleurMatch/{demandeId}")
-    public ResponseEntity<AppelOffre> trouverMeilleurMatch(@PathVariable Integer demandeId) {
-        DemandeAchat demande = new DemandeAchat();
-        demande.setId(demandeId);
-        AppelOffre meilleurMatch = appelOffreService.trouverMeilleurMatch(demande);
-        if (meilleurMatch == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(meilleurMatch);
+    @PostMapping("/accepter")
+    public ResponseEntity<String> accepterMatch(@RequestBody AppelOffre match) {
+        String message = appelOffreService.accepterMatch(match);
+        return ResponseEntity.ok(message);
     }
-
-    */
 
 }

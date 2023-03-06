@@ -1,16 +1,10 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.AutreCharge;
-import com.esprit.achat.persistence.entity.Commande;
 import com.esprit.achat.persistence.entity.DemandeAchat;
-import com.esprit.achat.persistence.entity.Facture;
-import com.esprit.achat.persistence.enumeration.Etat;
-import com.esprit.achat.persistence.enumeration.OffreType;
 import com.esprit.achat.services.Interface.AutreChargeService;
-import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.DemandeAchatService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +12,6 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/demandeAchat")
-@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class DemandeAchatController {
     private DemandeAchatService demandeAchatService;
@@ -52,6 +45,7 @@ public class DemandeAchatController {
     DemandeAchat retrieve(@PathVariable("id") Integer id){
         return demandeAchatService.retrieve(id);
     }
+
 
 
 }

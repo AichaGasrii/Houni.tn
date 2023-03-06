@@ -5,7 +5,6 @@ import com.esprit.achat.services.Interface.NatureArticleService;
 import com.esprit.achat.services.Interface.OffrePService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/natureArticle")
-@PreAuthorize("hasRole('User')")
 @AllArgsConstructor
 public class NatureArticleController {
     private NatureArticleService natureArticleService;
@@ -28,15 +26,11 @@ public class NatureArticleController {
     @PostMapping("/add")
     void add(@RequestBody NatureArticle n){
 
-        if(Objects.nonNull(n.getOffreProduit()) && Objects.nonNull(n.getOffreProduit().getId()) ) {
-            OffreProduit offreProduit =  offrePService.retrieve(n.getOffreProduit().getId());
-
-            n.setOffreProduit(offreProduit);
-
-        }
-
         natureArticleService.add(n);
     }
+
+
+
     @PutMapping("/edit")
     void update(@RequestBody  NatureArticle n){
         natureArticleService.update(n);
@@ -59,5 +53,15 @@ public class NatureArticleController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("affecterOffresProduitsANatureArticle/{idOffre}/{idNature}")
+    void affecterOffresProduitsANatureArticle(@PathVariable Integer idOffre, @PathVariable Integer idNature){
+        natureArticleService.affecterOffresProduitsANatureArticle(idOffre,idNature);
+    }
+
+    @GetMapping("/produit-nature/{natureId}")
+    @ResponseStatus
+    public List<OffreProduit> listeDeproduitParNature(@PathVariable Integer natureId) {
+        return natureArticleService.listeDeproduitParNature(natureId);
+    }
 
 }

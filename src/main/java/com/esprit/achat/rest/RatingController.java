@@ -2,6 +2,7 @@ package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.services.Implementation.UserService;
+import com.esprit.achat.services.Interface.OffrePService;
 import com.esprit.achat.services.Interface.RatingService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

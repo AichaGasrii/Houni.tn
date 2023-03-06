@@ -14,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
@@ -23,7 +22,6 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/offreService")
-@PreAuthorize("hasRole('Fournisseur')")
 @AllArgsConstructor
 public class OffreServiceController {
 
@@ -59,6 +57,7 @@ public class OffreServiceController {
     OffreService retrieve(@PathVariable("id") Integer id){
         return offreService.retrieve(id);
     }
+
     @GetMapping("/offers/{id}/qrcode")
     public ResponseEntity<byte[]> generateQRCode(@PathVariable int id) throws Exception {
         // Get the offer data

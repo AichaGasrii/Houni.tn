@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface OffreProduitRepository extends CrudRepository<OffreProduit, Integer>{
-    @Query("Select p FROM OffreProduit p join p.appeloffre na where na.natureArticle = :natureArticle")
+    @Query("SELECT op FROM NatureArticle op WHERE op.offreProduits = :natureArticle")
     List<OffreProduit> produitParNature(@Param("natureArticle") NatureArticle natureArticle);
 }

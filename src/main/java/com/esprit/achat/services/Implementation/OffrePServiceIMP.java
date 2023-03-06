@@ -1,13 +1,14 @@
 package com.esprit.achat.services.Implementation;
 
-import com.esprit.achat.persistence.entity.NatureArticle;
+import com.esprit.achat.persistence.entity.AppelOffre;
 import com.esprit.achat.persistence.entity.OffreProduit;
 import com.esprit.achat.repositories.OffreProduitRepository;
 import com.esprit.achat.services.Interface.OffrePService;
+import com.esprit.achat.services.Interface.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class OffrePServiceIMP extends CrudServiceIMP<OffreProduit,Integer> implements OffrePService {
@@ -16,42 +17,37 @@ public class OffrePServiceIMP extends CrudServiceIMP<OffreProduit,Integer> imple
     @Autowired
     OffreProduitRepository offreProduitRepository;
 
+    @Autowired
+    UploadFileService uploadFileService;
+
+    @Value("${file.upload}")
+    private String pathFile;
+
     @Override
-    public List<OffreProduit> listeDeproduitParNature(NatureArticle natureArticle){
-        return offreProduitRepository.produitParNature(natureArticle);
+    public OffreProduit addOffreProduit(String nom, Boolean disponibilité, Double quantite, MultipartFile image, Double prixUnitaire, AppelOffre appelOffre) {
 
-    }
-
-
-    /*
-    @Autowired
-    NatureArticleRepository natureArticleRepository;
-    @Autowired
-    UnitéRepository unitéRepository;
-    @Autowired
-    OffreProduitRepository offreProduitRepository;
-
-    public void affecterUnitesAuxNaturesArticles() {
-        List<NatureArticle> natureArticles = natureArticleRepository.findAll();
-        for (NatureArticle natureArticle : natureArticles) {
-            String unite = obtenirUnitePourNatureArticle(natureArticle);
-            natureArticle.setUnité(unite);
+        // Sauvegarde de l'image
+        boolean fileAdded = uploadFileService.addFile(image);
+        if (!fileAdded) {
+            throw new RuntimeException("Erreur lors de la sauvegarde de l'image.");
         }
-        natureArticleRepository.saveAll(natureArticles);
+        String imagePath = pathFile + image.getOriginalFilename();
+
+        // Création de l'objet OffreProduit
+        OffreProduit offreProduit = new OffreProduit();
+        offreProduit.setNom(nom);
+        offreProduit.setQuantite(quantite);
+        offreProduit.setDisponibilité(disponibilité);
+        offreProduit.setPhoto(imagePath);
+        offreProduit.setPrixUnitaire(prixUnitaire);
+        offreProduit.setAppeloffre(appelOffre);
+
+        OffreProduit savedOffreProduit =offreProduitRepository.save(offreProduit);
+
+
+        return savedOffreProduit;
     }
 
-    public String obtenirUnitePourNatureArticle(NatureArticle natureArticle) {
-        // Logique métier pour obtenir l'unité à affecter à la nature d'article
-        if (natureArticle.getSecteur().equals("Fruits")) {
-            return "kg";
-        } else if (natureArticle.getSecteur().equals("Produits laitiers")) {
-            return "L";
-        } else {
-            return "unité";
-        }
-    }
-
-     */
 
 
 }
