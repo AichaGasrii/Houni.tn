@@ -18,7 +18,8 @@ public class ReclamationServiceIMP extends CrudServiceIMP<Reclamation,Integer> i
     public Reclamation updateReclamation(Integer id, Reclamation reclamation) {
         Reclamation existingReclamation = retrieve(id);
         existingReclamation.setDescription(reclamation.getDescription());
-        existingReclamation.setDate(reclamation.getDate());
+
+        existingReclamation.setEmail(reclamation.getEmail());
         existingReclamation.setReclamationType(reclamation.getReclamationType());
 
         return reclamationRepository.save(existingReclamation);

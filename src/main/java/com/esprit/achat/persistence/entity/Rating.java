@@ -1,9 +1,6 @@
 package com.esprit.achat.persistence.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,23 +10,18 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@Table( uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"OffreProduitId", "user_id"})
-})
 public class Rating implements Serializable {
     //  -------------------moslem-------------------
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int rate;
+    private Integer rate;
     @ManyToOne
-    @JoinColumn(name = "OffreProduitId", nullable = false)
-    @JsonIgnore
+
     private OffreProduit OffreProduit;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
     private User user;
 
 

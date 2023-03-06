@@ -1,6 +1,7 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.entity.*;
+import com.esprit.achat.services.Implementation.OffrePServiceIMP;
 import com.esprit.achat.services.Implementation.UserService;
 import com.esprit.achat.services.Interface.CommandeService;
 import com.esprit.achat.services.Interface.OffrePService;
@@ -19,7 +20,7 @@ public class RatingController {
     @Autowired
     RatingService ratingService;
     @Autowired
-    OffrePService offrePService;
+    OffrePService offre;
     @Autowired
     UserService userService;
     @GetMapping
@@ -29,12 +30,11 @@ public class RatingController {
     @PostMapping("/add")
     void add(@RequestBody Rating r){
         if(Objects.nonNull(r.getOffreProduit()) && Objects.nonNull(r.getOffreProduit().getId())  && Objects.nonNull(r.getUser()) && Objects.nonNull(r.getUser().getUserName()) ) {
-            OffreProduit offreProduit =  offrePService.retrieve(r.getOffreProduit().getId());
+            OffreProduit p =  offre.retrieve(r.getOffreProduit().getId());
             User user =  userService.retrieve(r.getUser().getUserName());
-            r.setOffreProduit(offreProduit);
+            r.setOffreProduit(p);
             r.setUser(user);
         }
-
         ratingService.add(r);
     }
     @PutMapping("/edit")

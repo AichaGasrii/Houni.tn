@@ -1,9 +1,11 @@
 package com.esprit.achat.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "offreProduit")
@@ -29,6 +31,9 @@ public class OffreProduit implements Serializable {
     @ManyToOne
     @ToString.Exclude
     private AppelOffre appeloffre;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "OffreProduit")
+
+    private List<Rating> ratings;
 
 
 

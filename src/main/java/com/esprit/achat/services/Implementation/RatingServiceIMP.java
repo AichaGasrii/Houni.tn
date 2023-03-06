@@ -37,12 +37,10 @@ public class RatingServiceIMP  implements RatingService {
 
     @Override
     public void add(Rating t) {
-        try{
+
 
             RatingRepositoryMy.save(t);
-        } catch (Exception err) {
-            System.out.println("Un erreur est survenue : " + err);
-        }
+
 
     }
 
