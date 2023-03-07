@@ -1,16 +1,14 @@
 package com.esprit.achat.services.Implementation;
 
-import com.esprit.achat.persistence.entity.*;
+import com.esprit.achat.persistence.entity.Role;
+import com.esprit.achat.persistence.entity.User;
 import com.esprit.achat.repositories.RoleRepository;
 import com.esprit.achat.repositories.UserRepository;
-
-import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
 
@@ -18,7 +16,6 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 @Service
 public class UserService {
     @Autowired
@@ -29,8 +26,7 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserService userService;
+
 
     public void initRoleAndUser() {
 
@@ -44,6 +40,15 @@ public class UserService {
         userRole.setRoleDescription("Default role for newly created record");
         roleDao.save(userRole);
 
+        User adminUser = new User();
+        adminUser.setUserName("admin123");
+        adminUser.setUserPassword(getEncodedPassword("admin@pass"));
+        adminUser.setUserFirstName("admin");
+        adminUser.setUserLastName("admin");
+        Set<Role> adminRoles = new HashSet<>();
+        adminRoles.add(adminRole);
+        adminUser.setRole(adminRoles);
+        userDao.save(adminUser);
         Role FournisseurRole = new Role();
         FournisseurRole.setRoleName("Fournisseur");
         FournisseurRole.setRoleDescription("Fournisseur role");
@@ -55,15 +60,6 @@ public class UserService {
         ModerateurRole.setRoleDescription("Moderateur role");
         roleDao.save(ModerateurRole);
 
-        User adminUser = new User();
-        adminUser.setUserName("admin123");
-        adminUser.setUserPassword(getEncodedPassword("admin"));
-        adminUser.setUserFirstName("admin");
-        adminUser.setUserLastName("admin");
-        Set<Role> adminRoles = new HashSet<>();
-        adminRoles.add(adminRole);
-        adminUser.setRole(adminRoles);
-        userDao.save(adminUser);
 
 //        User user = new User();
 //        user.setUserName("raj123");
@@ -77,15 +73,11 @@ public class UserService {
     }
 
     public User registerNewUser(User user) {
-
-
         Role role = roleDao.findById("User").get();
         Set<Role> userRoles = new HashSet<>();
+        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
         userRoles.add(role);
         user.setRole(userRoles);
-        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
-
-
 
         return userDao.save(user);
     }
@@ -100,19 +92,24 @@ public class UserService {
     public User findOne(String userName){
         return userDao.findById(userName).orElse(null);
     }
-    public void delete(String userName) {
-        User u = userDao.findById(userName).orElse(null);
-        if (u != null) {
-            u.getRole().clear();
-            userDao.delete(u);
-        }
+    public void delete(String userName){
+        User u= userDao.findById(userName).orElse(null);
+        u.getRole().clear();
+        userDao.delete(u);
     }
     public void update(User user){
         userDao.save(user);
     }
-    //public User findByEmail(String Email) {
-       // return userDao.findByEmail(Email);
-   // }
+    public void addRoleToUser(String roleName, String user)
+    {
+        Role r = roleDao.findById(roleName).orElse(null);
+        User u= userDao.findById(user).orElse(null);
+        Set<Role> userRoles = u.getRole();
+        userRoles.add(r);
+        u.setRole(userRoles);
+        userDao.save(u);
+    }
+
     public long count(){
       long count=userDao.count();
       return count;
@@ -159,18 +156,10 @@ public class UserService {
         }
         return countusers;
     }
-  //  public boolean ifEmailExist(String email){
-        //return userDao.existsByEmail(email);
-  //  }
-   // public User getUserByMail(String mail){
-      //  return this.userDao.findByEmail(mail);
-   // }
-
-
 
 
     public static final String ACCOUNT_SID = "ACa9b8ab43f7a7e83f03838cc677d4c33b";
-    public static final String AUTH_TOKEN = "43fcab1438b98b24d4f913b1234c0be0";
+    public static final String AUTH_TOKEN = "41d34221dc8ac054654f2da256dbe99a";
 
     public static final String sender_number ="+15673131960";
 
@@ -206,17 +195,6 @@ public class UserService {
     }
 
 
-
-
-    public void addRoleToUser(String roleName, String user)
-    {
-        Role r = roleDao.findById(roleName).orElse(null);
-        User u= userDao.findById(user).orElse(null);
-        Set<Role> userRoles = u.getRole();
-        userRoles.add(r);
-        u.setRole(userRoles);
-        userDao.save(u);
-    }
 
 
     public User retrieve(String username) {

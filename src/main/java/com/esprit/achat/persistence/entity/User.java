@@ -14,6 +14,17 @@ public class User {
     private String userPassword;
     private String userNumber;
     private String userCode;
+    private String userEmail;
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+
 
     public String getUserCode() {
         return userCode;
@@ -25,19 +36,13 @@ public class User {
 
 
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserNumber() {
+        return userNumber;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
     }
-
-    private String userEmail;
-
-
-
-
 
 
 
@@ -55,15 +60,9 @@ public class User {
     public String getUserName() {
         return userName;
     }
-    public String getUserNumber() {
-        return userNumber;
-    }
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-    public void setUserNumber(String userNumber) {
-        this.userNumber = userNumber;
     }
 
     public String getUserFirstName() {
@@ -89,8 +88,6 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
-
-
 
     public Set<Role> getRole() {
         return role;
