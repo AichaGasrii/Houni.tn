@@ -1,18 +1,24 @@
 package com.esprit.achat.rest;
 
 import com.esprit.achat.persistence.dto.ValidAdress;
+import com.esprit.achat.persistence.dto.ValidCountry;
 import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.persistence.enumeration.Etat;
 import com.esprit.achat.repositories.FactureRepository;
 import com.esprit.achat.services.Interface.FactureService;
 import com.mysql.cj.xdevapi.Client;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/facture")
@@ -25,27 +31,34 @@ public class FactureController {
 
     @GetMapping
     List<Facture> retrieveAll(){
+
         return factureService.retrieveAll();
     }
 
     @PostMapping("/add")
-    void add(@ValidAdress @RequestBody Facture f){
+    void add(@ValidCountry @Valid @RequestBody Facture f){
+
+
+
         factureService.add(f);
     }
 
     @PutMapping("/edit")
-    void update(@ValidAdress @RequestBody Facture f){
+    void update(@ValidCountry @RequestBody Facture f){
+
         factureService.update(f);
     }
 
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id){
+
         factureService.remove(id);
     }
 
     @GetMapping("/{id}")
     Facture retrieve(@PathVariable("id") Integer id){
-        return factureService.retrieve(id);
+        return
+                factureService.retrieve(id);
     }
 
 
@@ -57,13 +70,27 @@ public class FactureController {
         return factureRepository.save(facture);
     }
 
-    @GetMapping("/nbFactureParClient/{client}")
-    public Integer nbFactureParClient (@PathVariable Client client){
-        return  factureService.nbFactureParClient(client);}
 
     @GetMapping("/items-facture/{factureId}")
     @ResponseStatus
     public List<ItemFacture> listeDesItemParFacture(@PathVariable Integer factureId) {
         return factureService.listeDesItemParFacture(factureId);
+    }
+
+    @ControllerAdvice
+    public class CommandeControllerAdvice {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            Map<String, String> errors = new HashMap<>();
+            ex.getBindingResult().getAllErrors().forEach((error) -> {
+                String fieldName = ((FieldError) error).getField();
+                String errorMessage = error.getDefaultMessage();
+                errors.put(fieldName, errorMessage);
+            });
+            return errors;
+        }
     }
 }

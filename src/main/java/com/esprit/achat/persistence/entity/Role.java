@@ -2,8 +2,10 @@ package com.esprit.achat.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Role")
 public class Role {
     //  -------------------farouk-------------------
 

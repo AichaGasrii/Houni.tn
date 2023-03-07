@@ -12,6 +12,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
+@Table(name = "Address")
 @Getter
 @Setter
 @NoArgsConstructor

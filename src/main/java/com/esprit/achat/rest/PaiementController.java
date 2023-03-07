@@ -4,12 +4,17 @@ import com.esprit.achat.persistence.dto.ValidCountry;
 import com.esprit.achat.persistence.entity.Facture;
 import com.esprit.achat.persistence.entity.FactureAvoir;
 import com.esprit.achat.persistence.entity.Paiement;
+import com.esprit.achat.persistence.enumeration.Etat;
+import com.esprit.achat.persistence.enumeration.Methode;
 import com.esprit.achat.services.Interface.FactureService;
 import com.esprit.achat.services.Interface.FactureavoirService;
 import com.esprit.achat.services.Interface.PaiementService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import com.paypal.api.payments.*;
@@ -45,7 +50,7 @@ public class PaiementController {
     }
 
     @PostMapping("/add")
-    void add(@ValidCountry @RequestBody Paiement p){
+    void add(@Valid @RequestBody Paiement p){
         if(Objects.nonNull(p.getFacture()) && Objects.nonNull(p.getFacture().getId())) {
             Facture facture =  factureService.retrieve(p.getFacture().getId());
             p.setFacture(facture);
@@ -67,7 +72,7 @@ public class PaiementController {
 
 
     @PutMapping("/edit")
-    void update(@ValidCountry @RequestBody Paiement p){
+    void update(@Valid @RequestBody Paiement p){
         paiementService.update(p);
     }
 
@@ -86,6 +91,28 @@ public class PaiementController {
         paiementService.affecterDeviseAuxPaiements();
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/nbPaiementParMethode/{methode}")
+    public Integer nbPaiementParMethode (@PathVariable Methode methode){
+        return  paiementService.nbPaiementParMethode(methode);}
+
+    @ControllerAdvice
+    public class CommandeControllerAdvice {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            Map<String, String> errors = new HashMap<>();
+            ex.getBindingResult().getAllErrors().forEach((error) -> {
+                String fieldName = ((FieldError) error).getField();
+                String errorMessage = error.getDefaultMessage();
+                errors.put(fieldName, errorMessage);
+            });
+            return errors;
+        }
+    }
+
 /*
     @Value("${paypal.clientId}")
     private String clientId;

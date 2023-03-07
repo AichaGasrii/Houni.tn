@@ -16,7 +16,7 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 @Entity
-@Table(name = "commande")
+@Table(name = "Commande")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -48,23 +48,13 @@ public class Commande implements Serializable {
     @ValidAdress
     private String adresseclient;
 
-   // @NotBlank(message = "Devise est obligatoire")
     private String devise;
 
     @NotNull(message = "Le champ datefacture ne peut pas être vide")
     @PastOrPresent(message = "La date de la commande doit être dans le passé ou le présent")
     @Column(name = "date_creation")
-    //@Temporal(TemporalType.DATE)
     private LocalDate dateCreation;
-   /* @NotNull(message = "Le champ prixht ne peut pas être vide")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Le prix HT doit être supérieur à 0")
-    private Double prixht;
-    @DecimalMin(value = "0.0", message = "Le total de remise doit être supérieur ou égal à 0")
-    private Double totalremise;
-    @DecimalMin(value = "0.0", message = "Le total de TVA doit être supérieur ou égal à 0")
-    private Double totaltva;
 
-    */
   //  @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
     private Double totalttc;
     private Boolean archive;

@@ -5,11 +5,17 @@ import com.esprit.achat.repositories.AppelOffreRepository;
 import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
 import org.json.JSONException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -23,7 +29,7 @@ public class AppelOffreController {
     private AppelOffreRepository appelOffreRepository;
 
     private OffreSService offreSService;
-    @PreAuthorize("hasRole('Fournisseur')")
+
     @GetMapping
     List<AppelOffre> retrieveAll() {
         return appelOffreService.retrieveAll();
@@ -31,7 +37,7 @@ public class AppelOffreController {
     @PreAuthorize("hasRole('Fournisseur')")
     @PostMapping("/add")
     @CrossOrigin
-    void add(@RequestBody AppelOffre a) {
+    void add(@Valid @RequestBody AppelOffre a) {
         if (Objects.nonNull(a.getDemandeAchat()) && Objects.nonNull(a.getDemandeAchat().getId()) && Objects.nonNull(a.getNatureArticle()) && Objects.nonNull(a.getNatureArticle().getId())) {
             DemandeAchat demandeAchat = demandeAchatService.retrieve(a.getDemandeAchat().getId());
             NatureArticle natureArticle = natureArticleService.retrieve(a.getNatureArticle().getId());
@@ -53,7 +59,7 @@ public class AppelOffreController {
     void remove(@PathVariable("id") Integer id) {
         appelOffreService.remove(id);
     }
-    @PreAuthorize("hasRole('Fournisseur')")
+
     @GetMapping("/{id}")
     AppelOffre retrieve(@PathVariable("id") Integer id) {
         return appelOffreService.retrieve(id);
@@ -89,6 +95,23 @@ public class AppelOffreController {
     public ResponseEntity<String> accepterMatch(@RequestBody AppelOffre match) {
         String message = appelOffreService.accepterMatch(match);
         return ResponseEntity.ok(message);
+    }
+
+    @ControllerAdvice
+    public class CommandeControllerAdvice {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            Map<String, String> errors = new HashMap<>();
+            ex.getBindingResult().getAllErrors().forEach((error) -> {
+                String fieldName = ((FieldError) error).getField();
+                String errorMessage = error.getDefaultMessage();
+                errors.put(fieldName, errorMessage);
+            });
+            return errors;
+        }
     }
 
 }

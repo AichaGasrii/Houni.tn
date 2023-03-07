@@ -1,6 +1,7 @@
 package com.esprit.achat.persistence.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
@@ -8,10 +9,53 @@ public class User {
     //  -------------------farouk-------------------
 
     @Id
+    @NotBlank(message = "Ce champ est obligatoire")
+    @Size(min = 3, message = "Ce champs doit contenir au moins 3 caractères")
     private String userName;
+    @NotBlank(message = "Ce champ est obligatoire")
+    @Size(min = 3, message = "Ce champs doit contenir au moins 3 caractères")
+    @NotNull
     private String userFirstName;
+    @NotBlank(message = "Ce champ est obligatoire")
+    @Size(min = 3, message = "Ce champs doit contenir au moins 3 caractères")
+    @NotNull
     private String userLastName;
     private String userPassword;
+    @Pattern(regexp = "[0-9]{8}", message = "Le nombre doit être composé de 8 chiffres")
+    private String userNumber;
+    private String userCode;
+    @Email
+    private String userEmail;
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+
+
+    public String getUserNumber() {
+        return userNumber;
+    }
+
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
+    }
+
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLE",

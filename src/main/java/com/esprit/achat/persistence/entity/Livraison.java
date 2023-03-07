@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "Delivery")
 @Getter
 @Setter
 @NoArgsConstructor

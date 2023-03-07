@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
+@Table(name = "Response")
 @Getter
 @Setter
 @NoArgsConstructor

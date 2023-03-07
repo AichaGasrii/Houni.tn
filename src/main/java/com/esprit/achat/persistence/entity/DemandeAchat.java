@@ -6,11 +6,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "demandeachat")
+@Table(name = "Purchase_Request")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,6 +29,7 @@ public class DemandeAchat implements Serializable {
 
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String objet;
+    @Size(max = 10, message = "Le champ code doit avoir au maximum 10 caractères")
 
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String description;

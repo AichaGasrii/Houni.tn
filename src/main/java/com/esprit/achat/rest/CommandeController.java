@@ -12,14 +12,19 @@ import com.esprit.achat.services.Interface.ItemCommandeService;
 import com.esprit.achat.services.Interface.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -32,19 +37,20 @@ public class CommandeController {
     private FactureService factureService;
 
     private CommandeRepository commandeRepository;
-    @PreAuthorize("hasRole('Operateur')")
+
     @GetMapping
     List<Commande> retrieveAll(){
         return commandeService.retrieveAll();
     }
 
     @PostMapping("/add")
-    void add(@ValidAdress @RequestBody Commande c){
+    void add(@Valid @RequestBody Commande c){
 
         if(Objects.nonNull(c.getFacture()) && Objects.nonNull(c.getFacture().getId()) ) {
             Facture facture =  factureService.retrieve(c.getFacture().getId());
             c.setFacture(facture);
         }
+
 
         commandeService.add(c);
     }
@@ -58,7 +64,7 @@ public class CommandeController {
     void remove(@PathVariable("id") Integer id){
         commandeService.remove(id);
     }
-    @PreAuthorize("hasRole('User')")
+
     @GetMapping("/{id}")
     Commande retrieve(@PathVariable("id") Integer id){
         return commandeService.retrieve(id);
@@ -94,6 +100,22 @@ public class CommandeController {
     @ResponseStatus
     public List<ItemCommande> listeDesItemParCommande(@PathVariable Integer commandeId) {
         return commandeService.listeDesItemParCommande(commandeId);
+    }
+    @ControllerAdvice
+    public class CommandeControllerAdvice {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            Map<String, String> errors = new HashMap<>();
+            ex.getBindingResult().getAllErrors().forEach((error) -> {
+                String fieldName = ((FieldError) error).getField();
+                String errorMessage = error.getDefaultMessage();
+                errors.put(fieldName, errorMessage);
+            });
+            return errors;
+        }
     }
 
 }

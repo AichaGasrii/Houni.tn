@@ -41,7 +41,7 @@ public class ScheduleBean  {
     @Autowired
     CommandeRepository commandeRepository;
 
-    @Scheduled(cron = "*/30 * * * * *")
+  //  @Scheduled(cron = "*/30 * * * * *")
     public void scheduleCommandeStatusUpdate() {
         log.info("scheduleCommandeStatusUpdate() method called");
         try {
@@ -63,7 +63,7 @@ public class ScheduleBean  {
         }
     }
 
-    @Scheduled(cron = "*/30 * * * * *")
+   // @Scheduled(cron = "*/30 * * * * *")
     public void retrieveAndUpdateStatusCommande() {
 
         commandeRepository.findByArchiveFalseAndDateCreation(LocalDate.now())

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "item_commande")
+@Table(name = "Order_Item")
 @Getter
 @Setter
 @NoArgsConstructor

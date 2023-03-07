@@ -13,7 +13,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
-@Table(name = "paiement")
+@Table(name = "Payment")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,7 +36,7 @@ public class Paiement implements Serializable {
     private Double prix;
 
     @ValidCountry
-    @Pattern(regexp = "[A-Z][a-zA-Z ]*", message = "Le pays doit être une chaîne de caractères commençant par une lettre majuscule suivie de lettres minuscules ou d'espaces")
+  //  @Pattern(regexp = "[A-Z][a-zA-Z ]*", message = "Le pays doit être une chaîne de caractères commençant par une lettre majuscule suivie de lettres minuscules ou d'espaces")
     private String pays;
 
 //    @NotBlank(message = "La devise ne peut pas être vide")

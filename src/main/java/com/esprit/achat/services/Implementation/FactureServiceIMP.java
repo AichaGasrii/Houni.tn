@@ -6,6 +6,7 @@ import com.esprit.achat.services.Interface.FactureService;
 import com.mysql.cj.xdevapi.Client;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -25,30 +26,13 @@ public class FactureServiceIMP  extends CrudServiceIMP<Facture,Integer> implemen
         return totalttc;
     }
 
-
-
-
     @Override
-    public Integer nbFactureParClient(Client client) {
-
-        Integer nbr = 0;
-
-
-        List<Facture> factures = factureRepository.findAll();
-        for (Facture facture : factures) {
-            if (facture.getClient().equals(client)) {
-                nbr++;
-            }
-        }
-
-        return nbr;
-    }
-    @Override
-    public List<ItemFacture> listeDesItemParFacture(Integer factureId){
-        Facture facture= factureRepository.findById(factureId).orElse(null);
+    public List<ItemFacture> listeDesItemParFacture(Integer factureId) {
+        Facture facture = factureRepository.findById(factureId)
+                .orElseThrow(() -> new EntityNotFoundException("Facture not found with id " + factureId));
         return facture.getItems();
-
     }
+
 
 
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "offreProduit")
+@Table(name = "Product_offer")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,25 +24,26 @@ public class OffreProduit implements Serializable {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "nom", nullable = false, unique = true)
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @Column(name = "quantite", nullable = false, unique = true)
+    @Column(name = "quantite", nullable = false)
     private Double quantite;
 
-    @Column(name = "disponibilité", nullable = false, unique = true)
+    @Column(name = "disponibilité", nullable = false)
     private Boolean disponibilité;
 
-    @Column(name = "image", nullable = false, unique = true)
+    @Column(name = "image", nullable = false)
     private String photo;
 
-    @Column(name = "prixUnitaire", nullable = false, unique = true)
+    @Column(name = "prixUnitaire", nullable = false)
     private Double prixUnitaire;
     @ManyToOne
     @ToString.Exclude
     private AppelOffre appeloffre;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "OffreProduit")
-    private List<Rating> ratings;
+    @OneToMany(mappedBy = "offreProduit")
+    @JsonIgnore
+    private List <Rating> ratings;
 
     public OffreProduit(String nom, Double quantite, Boolean disponibilité, String photo, Double prixUnitaire) {
         if (nom == null || nom.isEmpty()) {

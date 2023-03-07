@@ -3,16 +3,21 @@ package com.esprit.achat.rest;
 import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.services.Interface.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("/itemcommande")
-@PreAuthorize("hasRole('Operateur')")
+
 @AllArgsConstructor
 public class ItemCommandeController {
     private ItemCommandeService itemCommandeService;
@@ -22,7 +27,7 @@ public class ItemCommandeController {
 
     @GetMapping
     List<ItemCommande> retrieveAll() { return itemCommandeService.retrieveAll();}
-
+    @PreAuthorize("hasRole('Operateur')")
     @PostMapping("/add/{commandeId}")
     void add(@RequestBody ItemCommande i, @PathVariable ("commandeId")Integer commandeId) {
 
@@ -38,12 +43,13 @@ public class ItemCommandeController {
 
         itemCommandeService.add(i);
     }
+    @PreAuthorize("hasRole('Operateur')")
     @PutMapping("/edit")
     void update(@RequestBody ItemCommande i) {
 
         itemCommandeService.update(i);
     }
-
+    @PreAuthorize("hasRole('Operateur')")
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Integer id) {
         ItemCommande itemCommande = itemCommandeService.retrieve(id);
@@ -68,10 +74,26 @@ public class ItemCommandeController {
     ItemCommande retrieve(@PathVariable("id") Integer id) {
         return itemCommandeService.retrieve(id);
     }
-
+    @PreAuthorize("hasRole('Operateur')")
     @PostMapping("/calculate-tva")
     public ResponseEntity<String> calculateTva() {
         itemCommandeService.affecterTVAAuxItems();
         return ResponseEntity.ok("TVA affectée avec succès");
+    }
+    @ControllerAdvice
+    public class CommandeControllerAdvice {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            Map<String, String> errors = new HashMap<>();
+            ex.getBindingResult().getAllErrors().forEach((error) -> {
+                String fieldName = ((FieldError) error).getField();
+                String errorMessage = error.getDefaultMessage();
+                errors.put(fieldName, errorMessage);
+            });
+            return errors;
+        }
     }
 }

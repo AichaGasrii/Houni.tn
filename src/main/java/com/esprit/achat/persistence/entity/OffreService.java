@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "offreService")
+@Table(name = "Service_Offer")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,19 +22,19 @@ public class OffreService implements Serializable {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "nom", nullable = false, unique = true)
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @Column(name = "heures", nullable = false, unique = true)
+    @Column(name = "heures", nullable = false)
     private Double heures;
 
-    @Column(name = "disponibilité", nullable = false, unique = true)
+    @Column(name = "disponibilité", nullable = false)
     private Boolean disponibilité;
 
-    @Column(name = "image", nullable = false, unique = true)
+    @Column(name = "image", nullable = false)
     private String photo;
 
-    @Column(name = "prixParHeure", nullable = false, unique = true)
+    @Column(name = "prixParHeure", nullable = false)
     private Double prixparheure;
 
     @ManyToOne

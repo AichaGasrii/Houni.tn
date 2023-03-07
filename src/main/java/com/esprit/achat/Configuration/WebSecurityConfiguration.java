@@ -43,6 +43,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/authenticate", "/registerNewUser").permitAll()
                 //  .anyRequest().permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
+                .antMatchers("/checkEmail").permitAll()
+                .antMatchers("/resetPassword").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)

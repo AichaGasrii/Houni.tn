@@ -4,9 +4,12 @@ import com.esprit.achat.persistence.entity.Role;
 import com.esprit.achat.persistence.entity.User;
 import com.esprit.achat.repositories.RoleRepository;
 import com.esprit.achat.repositories.UserRepository;
+import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.twilio.Twilio;
+import com.twilio.type.PhoneNumber;
 
 
 import javax.transaction.Transactional;
@@ -46,6 +49,17 @@ public class UserService {
         adminRoles.add(adminRole);
         adminUser.setRole(adminRoles);
         userDao.save(adminUser);
+        Role FournisseurRole = new Role();
+        FournisseurRole.setRoleName("Fournisseur");
+        FournisseurRole.setRoleDescription("Fournisseur role");
+        roleDao.save(FournisseurRole);
+
+
+        Role OperateurRole = new Role();
+        OperateurRole.setRoleName("Operateur");
+        OperateurRole.setRoleDescription("Operateur role");
+        roleDao.save(OperateurRole);
+
 
 //        User user = new User();
 //        user.setUserName("raj123");
@@ -59,8 +73,11 @@ public class UserService {
     }
 
     public User registerNewUser(User user) {
-
+        Role role = roleDao.findById("User").get();
+        Set<Role> userRoles = new HashSet<>();
         user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+        userRoles.add(role);
+        user.setRole(userRoles);
 
         return userDao.save(user);
     }
@@ -82,6 +99,15 @@ public class UserService {
     }
     public void update(User user){
         userDao.save(user);
+    }
+    public void addRoleToUser(String roleName, String user)
+    {
+        Role r = roleDao.findById(roleName).orElse(null);
+        User u= userDao.findById(user).orElse(null);
+        Set<Role> userRoles = u.getRole();
+        userRoles.add(r);
+        u.setRole(userRoles);
+        userDao.save(u);
     }
 
     public long count(){
@@ -130,6 +156,47 @@ public class UserService {
         }
         return countusers;
     }
+
+
+    public static final String ACCOUNT_SID = "ACa9b8ab43f7a7e83f03838cc677d4c33b";
+    public static final String AUTH_TOKEN = "41d34221dc8ac054654f2da256dbe99a";
+
+    public static final String sender_number ="+15673131960";
+
+    public void sms(String userName){
+        User user = userDao.findById(userName).orElse(null);
+        // Find your Account Sid and Token at twilio.com/user/account
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+        Message message = Message.creator(new PhoneNumber("+216"+ user.getUserNumber()),
+                new PhoneNumber(sender_number),
+                "This is the ship that made the Kessel Run in fourteen parsecs?").create();
+
+        System.out.println(message.getSid());
+    }
+
+    // Reset Password:
+    public boolean ifEmailExist(String UserEmail){
+        return userDao.existsByUserEmail(UserEmail);
+    }
+
+    @Transactional
+    public String getPasswordByUserEmail(String userEmail){
+        return userDao.getPasswordByUserEmail(userEmail);
+    }
+
+    public User findByUserEmail(String UserEmail)
+    {
+        return this.userDao.findByUserEmail(UserEmail);
+    }
+
+    public void editUser(User user){
+        this.userDao.save(user);
+    }
+
+
+
+
     public User retrieve(String username) {
         try{
             return  userDao.findById(username).get();

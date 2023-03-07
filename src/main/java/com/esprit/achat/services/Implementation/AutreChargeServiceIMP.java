@@ -38,4 +38,20 @@ public class AutreChargeServiceIMP extends CrudServiceIMP<AutreCharge,Integer> i
         }
         return demandes;
     }
+
+    @Override
+    public Integer nbChargeParECharge(ECharge eCharge) {
+
+        Integer nbr = 0;
+
+
+        List<AutreCharge> autreCharges = autreChargeRepository.findAll();
+        for (AutreCharge autreCharge : autreCharges) {
+            if (autreCharge.getECharge().equals(eCharge)) {
+                nbr++;
+            }
+        }
+
+        return nbr;
+    }
 }

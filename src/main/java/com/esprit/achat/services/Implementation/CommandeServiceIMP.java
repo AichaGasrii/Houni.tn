@@ -16,8 +16,10 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -114,6 +116,26 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
                 return "EUR";
             case "uk":
                 return "GBP";
+            case "japon":
+                return "JPY";
+            case "australie":
+                return "AUD";
+            case "chine":
+            case "hong kong":
+            case "singapour":
+                return "CNY";
+            case "brésil":
+                return "BRL";
+            case "algérie":
+                return "DZD";
+            case "inde":
+                return "INR";
+            case "corée du sud":
+                return "KRW";
+            case "royaume-uni":
+                return "GBP";
+            case "mexique":
+                return "MXN";
             default:
                 return "devise introuvable";
         }
@@ -130,11 +152,15 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
     private static final Logger logger = LoggerFactory.getLogger(Commande.class);
 
     @Override
-    public List<ItemCommande> listeDesItemParCommande(Integer commandeId){
-        Commande commande= commandeRepository.findById(commandeId).orElse(null);
-        return commande.getItems();
-
+    public List<ItemCommande> listeDesItemParCommande(Integer commandeId) {
+        Optional<Commande> optionalCommande = commandeRepository.findById(commandeId);
+        if (optionalCommande.isPresent()) {
+            Commande commande = optionalCommande.get();
+            return commande.getItems();
+        }
+        return Collections.emptyList();
     }
+
 
     @Transactional
     @Override

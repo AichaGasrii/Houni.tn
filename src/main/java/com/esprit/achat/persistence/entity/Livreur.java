@@ -22,6 +22,7 @@ import java.util.Set;
 
 
 @Entity
+@Table(name = "Deliveryman")
 @Getter
 @Setter
 @NoArgsConstructor

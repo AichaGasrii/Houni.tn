@@ -9,11 +9,12 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "autrecharge")
+@Table(name = "Other_Charge")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,7 +29,7 @@ public class AutreCharge implements Serializable {
 
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String nom;
-
+    @Size(max = 10, message = "Le champ code doit avoir au maximum 10 caractères")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String description;
 

@@ -1,7 +1,6 @@
 package com.esprit.achat.persistence.entity;
 
 import com.esprit.achat.persistence.enumeration.ReclamationType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,16 +31,16 @@ public class Reclamation implements Serializable {
     private String description;
     @Temporal(TemporalType.DATE)
     private Date date;
+
+    private String email;
     @Enumerated(EnumType.STRING)
     private ReclamationType reclamationType;
 
     @ManyToOne
-    @JsonIgnore
+
     private Commande commande;
      @ManyToOne
-     private User user;
 
-    @OneToOne(mappedBy = "reclamation")
-    private Livraison livraison;
+     private User user;
 
 }

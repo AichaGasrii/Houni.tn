@@ -1,6 +1,7 @@
 package com.esprit.achat.persistence.entity;
 
 import com.esprit.achat.persistence.dto.ValidAdress;
+import com.esprit.achat.persistence.dto.ValidCountry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "facture")
+@Table(name = "Invoice")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,14 +35,15 @@ public class Facture implements Serializable {
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String reponsableclient;
     @NotBlank(message = "ce champ ne doit pas être vide")
-    @ValidAdress
+    @ValidCountry
     private String adresseclient;
-    @NotBlank(message = "Devise est obligatoire")
+  //  @NotBlank(message = "Devise est obligatoire")
     private String devise;
     @NotNull(message = "Le champ datefacture ne peut pas être vide")
     @PastOrPresent(message = "La date de la facture doit être dans le passé ou le présent")
     @Temporal(TemporalType.DATE)
     private Date datefacture;
+
     private LocalDate dateLivraison;
    // @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
     private Double totalttc;
