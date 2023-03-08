@@ -1,6 +1,7 @@
 package com.esprit.achat.persistence.entity;
 
 import com.esprit.achat.persistence.dto.ValidAdress;
+import com.esprit.achat.persistence.dto.ValidCountry;
 import com.esprit.achat.persistence.enumeration.ECharge;
 import com.esprit.achat.persistence.enumeration.Etat;
 import lombok.*;
@@ -45,7 +46,7 @@ public class Commande implements Serializable {
     private String reponsableclient;
 
     @NotBlank(message = "ce champ ne doit pas être vide")
-    @ValidAdress
+    @ValidCountry
     private String adresseclient;
 
     private String devise;
