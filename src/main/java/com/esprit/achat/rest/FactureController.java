@@ -77,6 +77,12 @@ public class FactureController {
         return factureService.listeDesItemParFacture(factureId);
     }
 
+    @PostMapping("/affecter-devise")
+    public ResponseEntity<Facture> affecterDeviseAuxFactures() {
+        factureService.affecterDeviseAuxFactures();
+        return ResponseEntity.ok().build();
+    }
+
     @ControllerAdvice
     public class CommandeControllerAdvice {
 

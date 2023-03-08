@@ -40,6 +40,9 @@ public class JwtService implements UserDetailsService {
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
         User user = userDao.findById(userName).get();
+      //  if(user.getIsverified()==0) {
+            //return new JwtResponse(null, null);
+     //   }
         return new JwtResponse(user, newGeneratedToken);
     }
 

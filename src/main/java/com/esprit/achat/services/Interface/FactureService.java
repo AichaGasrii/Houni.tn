@@ -15,5 +15,9 @@ public interface FactureService extends CrudService<Facture, Integer> {
 
 
     List<ItemFacture> listeDesItemParFacture(Integer factureId);
+
+    String obtenirDevisePourFacture(Facture facture);
+
+    void affecterDeviseAuxFactures();
 }
 

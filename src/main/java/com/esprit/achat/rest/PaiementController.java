@@ -49,7 +49,7 @@ public class PaiementController {
         return paiementService.retrieveAll();
     }
 
-    @PostMapping("/add")
+  /*  @PostMapping("/add")
     void add(@Valid @RequestBody Paiement p){
         if(Objects.nonNull(p.getFacture()) && Objects.nonNull(p.getFacture().getId())) {
             Facture facture =  factureService.retrieve(p.getFacture().getId());
@@ -59,8 +59,10 @@ public class PaiementController {
 
         paiementService.add(p);
     }
+
+   */
     @PostMapping("/pay/{factureId}")
-    void add(@PathVariable("factureId") Integer factureId, @ValidCountry @RequestBody Paiement p) {
+    void add(@PathVariable("factureId") Integer factureId, @Valid @RequestBody Paiement p) {
         Facture facture = factureService.retrieve(factureId);
         if (facture == null) {
             throw new IllegalArgumentException("Facture not found with id " + factureId);
