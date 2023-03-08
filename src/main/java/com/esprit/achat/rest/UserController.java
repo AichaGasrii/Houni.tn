@@ -8,6 +8,7 @@ import com.esprit.achat.services.Implementation.VerificationTokenService;
 import com.esprit.achat.util.UserCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.FieldError;
@@ -122,6 +123,26 @@ public class UserController {
 
 
     }
+    //activate compte
+    @PutMapping("/activate/{verificationToken}")
+    public ResponseEntity activateAccount(@PathVariable String verificationToken) {
+        User user = userService.activateUser(verificationToken);
+        if (user != null) {
+            String to = user.getUserEmail();
+            String subject = "Account Created";
+            String text = "Your account has been created successfully.";
+            emailServ.sendEmail(to, subject, text);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
+
+
+
+
     // mail
 
 
