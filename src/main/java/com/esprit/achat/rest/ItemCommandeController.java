@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class ItemCommandeController {
     List<ItemCommande> retrieveAll() { return itemCommandeService.retrieveAll();}
     @PreAuthorize("hasRole('Operateur')")
     @PostMapping("/add/{commandeId}")
-    void add(@RequestBody ItemCommande i, @PathVariable ("commandeId")Integer commandeId) {
+    void add(@Valid @RequestBody ItemCommande i, @PathVariable ("commandeId")Integer commandeId) {
 
         if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())) {
             OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
@@ -45,7 +46,7 @@ public class ItemCommandeController {
     }
     @PreAuthorize("hasRole('Operateur')")
     @PutMapping("/edit")
-    void update(@RequestBody ItemCommande i) {
+    void update(@Valid @RequestBody ItemCommande i) {
 
         itemCommandeService.update(i);
     }

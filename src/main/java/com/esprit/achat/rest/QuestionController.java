@@ -45,20 +45,5 @@ public class QuestionController {
     Question retrieve(@PathVariable("id") Integer id){
         return questionService.retrieve(id);
     }
-    @ControllerAdvice
-    public class CommandeControllerAdvice {
 
-        @ExceptionHandler(MethodArgumentNotValidException.class)
-        @ResponseStatus(HttpStatus.BAD_REQUEST)
-        @ResponseBody
-        public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-            Map<String, String> errors = new HashMap<>();
-            ex.getBindingResult().getAllErrors().forEach((error) -> {
-                String fieldName = ((FieldError) error).getField();
-                String errorMessage = error.getDefaultMessage();
-                errors.put(fieldName, errorMessage);
-            });
-            return errors;
-        }
-    }
 }

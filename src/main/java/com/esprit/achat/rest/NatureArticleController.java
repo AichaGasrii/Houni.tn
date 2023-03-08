@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class NatureArticleController {
     }
 
     @PostMapping("/add")
-    void add(@RequestBody NatureArticle n){
+    void add(@Valid @RequestBody NatureArticle n){
 
         natureArticleService.add(n);
     }
@@ -39,7 +40,7 @@ public class NatureArticleController {
 
 
     @PutMapping("/edit")
-    void update(@RequestBody  NatureArticle n){
+    void update(@Valid @RequestBody  NatureArticle n){
         natureArticleService.update(n);
     }
 

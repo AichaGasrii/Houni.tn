@@ -31,6 +31,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/offreProduit")
 
@@ -46,7 +48,7 @@ public class OffreProduitController {
     }
     @PreAuthorize("hasRole('Fournisseur')")
     @PostMapping("/add")
-    void add(@RequestBody OffreProduit o){
+    void add(@Valid @RequestBody OffreProduit o){
 
         if(Objects.nonNull(o.getAppeloffre()) && Objects.nonNull(o.getAppeloffre().getId()) ) {
             AppelOffre appelOffre =  appelOffreService.retrieve(o.getAppeloffre().getId());
@@ -58,7 +60,7 @@ public class OffreProduitController {
 
     @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
-    void update(@RequestBody OffreProduit o){
+    void update(@Valid @RequestBody OffreProduit o){
         offreService.update(o);
     }
     @PreAuthorize("hasRole('Fournisseur')")

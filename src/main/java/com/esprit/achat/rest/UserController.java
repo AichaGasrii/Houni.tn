@@ -4,6 +4,7 @@ import com.esprit.achat.persistence.entity.*;
 import com.esprit.achat.repositories.UserRepository;
 import com.esprit.achat.services.Implementation.EmailServiceImpl;
 import com.esprit.achat.services.Implementation.UserService;
+import com.esprit.achat.services.Implementation.VerificationTokenService;
 import com.esprit.achat.util.UserCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,8 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private VerificationTokenService verificationTokenService;
 
     @PostConstruct
     public void initRoleAndUser() {
@@ -39,8 +43,12 @@ public class UserController {
     }
 
     @PostMapping({"/registerNewUser"})
-    public User registerNewUser(@RequestBody User user) {
-        return userService.registerNewUser(user);
+    public User registerNewUser(@Valid @RequestBody User user) {
+
+        User savedUser = userService.registerNewUser(user);
+        VerificationToken verificationToken = verificationTokenService.createVerificationToken(user); // création du jeton de vérification
+        verificationTokenService.saveVerificationToken(verificationToken);
+        return savedUser;
     }
 
     @GetMapping({"/forAdmin"})
@@ -74,7 +82,7 @@ public class UserController {
 
     @PutMapping({"/update"})
     @PreAuthorize("hasRole('User')")
-    public void update(@RequestBody User user) {
+    public void update(@Valid @RequestBody User user) {
         userService.update(user);
     }
 

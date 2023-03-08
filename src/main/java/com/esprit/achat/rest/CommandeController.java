@@ -56,7 +56,7 @@ public class CommandeController {
     }
     @PreAuthorize("hasRole('Operateur')")
     @PutMapping("/edit")
-    void update(@ValidAdress @RequestBody Commande c){
+    void update(@Valid @RequestBody Commande c){
         commandeService.update(c);
     }
     @PreAuthorize("hasRole('Operateur')")

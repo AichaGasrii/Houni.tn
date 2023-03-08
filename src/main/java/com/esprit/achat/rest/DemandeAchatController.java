@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class DemandeAchatController {
     }
 
     @PostMapping("/add")
-    void add(@RequestBody DemandeAchat d){
+    void add(@Valid @RequestBody DemandeAchat d){
         if(Objects.nonNull(d.getAutreCharge()) && Objects.nonNull(d.getAutreCharge().getId()) ) {
             AutreCharge autreCharge =  autreChargeService.retrieve(d.getAutreCharge().getId());
             d.setAutreCharge(autreCharge);
@@ -39,7 +40,7 @@ public class DemandeAchatController {
     }
 
     @PutMapping("/edit")
-    void update(@RequestBody DemandeAchat d){
+    void update(@Valid @RequestBody DemandeAchat d){
         demandeAchatService.update(d);
     }
 

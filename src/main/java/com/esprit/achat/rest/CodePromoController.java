@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.List;
@@ -29,12 +30,12 @@ public class CodePromoController {
     }
 
     @PostMapping("/add")
-    void add(@RequestBody CodePromo c){
+    void add(@Valid @RequestBody CodePromo c){
         codePromoService.add(c);
     }
 
     @PutMapping("/edit")
-    void update(@RequestBody CodePromo c){
+    void update(@Valid @RequestBody CodePromo c){
         codePromoService.update(c);
     }
 

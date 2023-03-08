@@ -51,7 +51,7 @@ public class AppelOffreController {
 
     @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
-    void update(@RequestBody AppelOffre a) {
+    void update(@Valid @RequestBody AppelOffre a) {
         appelOffreService.update(a);
     }
     @PreAuthorize("hasRole('Fournisseur')")

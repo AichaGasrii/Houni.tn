@@ -36,7 +36,7 @@ public class FactureController {
     }
 
     @PostMapping("/add")
-    void add(@ValidCountry @Valid @RequestBody Facture f){
+    void add(@Valid @RequestBody Facture f){
 
 
 
@@ -44,7 +44,7 @@ public class FactureController {
     }
 
     @PutMapping("/edit")
-    void update(@ValidCountry @RequestBody Facture f){
+    void update(@Valid @RequestBody Facture f){
 
         factureService.update(f);
     }

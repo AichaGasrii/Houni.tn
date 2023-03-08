@@ -26,6 +26,8 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private EmailServiceImpl emailServ;
 
 
     public void initRoleAndUser() {
@@ -75,6 +77,8 @@ public class UserService {
     public User registerNewUser(User user) {
         Role role = roleDao.findById("User").get();
         Set<Role> userRoles = new HashSet<>();
+        user.setIsverified(0);
+        emailServ.sendVerificationEmail(user);
         user.setUserPassword(getEncodedPassword(user.getUserPassword()));
         userRoles.add(role);
         user.setRole(userRoles);
@@ -194,7 +198,15 @@ public class UserService {
         this.userDao.save(user);
     }
 
-
+    public User activateUser(String token) {
+        User user = userDao.findByVerificationToken(token);
+        if (user != null) {
+            user.setIsverified(1);
+            user.setVerificationToken(null);
+            userDao.save(user);
+        }
+        return user;
+    }
 
 
     public User retrieve(String username) {

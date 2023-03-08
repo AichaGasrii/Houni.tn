@@ -32,12 +32,12 @@ public class FactureAvoirController {
     }
 
     @PostMapping("/add")
-    void add(@ValidAdress @RequestBody FactureAvoir f){
+    void add(@Valid @RequestBody FactureAvoir f){
         factureavoirService.add(f);
     }
 
     @PutMapping("/edit")
-    void update(@ValidAdress @RequestBody FactureAvoir f){
+    void update(@Valid @RequestBody FactureAvoir f){
         factureavoirService.update(f);
     }
 

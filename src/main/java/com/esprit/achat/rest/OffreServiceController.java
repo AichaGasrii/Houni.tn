@@ -19,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,7 @@ public class OffreServiceController {
     }
     @PreAuthorize("hasRole('Fournisseur')")
     @PostMapping("/add")
-    void add(@RequestBody OffreService o){
+    void add(@Valid @RequestBody OffreService o){
         if(Objects.nonNull(o.getAppeloffre()) && Objects.nonNull(o.getAppeloffre().getId()) ) {
             AppelOffre appelOffre =  appelOffreService.retrieve(o.getAppeloffre().getId());
             o.setAppeloffre(appelOffre);
@@ -49,7 +50,7 @@ public class OffreServiceController {
     }
     @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
-    void update(@RequestBody OffreService o){
+    void update(@Valid @RequestBody OffreService o){
         offreService.update(o);
     }
     @PreAuthorize("hasRole('Fournisseur')")

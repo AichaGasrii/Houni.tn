@@ -21,7 +21,7 @@ public class User {
     @NotNull
     private String userLastName;
     private String userPassword;
-    @Pattern(regexp = "[0-9]{8}", message = "Le nombre doit être composé de 8 chiffres")
+    @Pattern(regexp = "[0-9]{8}", message = "Le numéro doit être composé de 8 chiffres")
     private String userNumber;
     private String userCode;
     @Email
@@ -35,7 +35,25 @@ public class User {
         this.userEmail = userEmail;
     }
 
+    public int getIsverified() {
+        return isverified;
+    }
 
+    public void setIsverified(int isverified) {
+        this.isverified = isverified;
+    }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    private int isverified;
+
+    private String verificationToken;
 
     public String getUserCode() {
         return userCode;

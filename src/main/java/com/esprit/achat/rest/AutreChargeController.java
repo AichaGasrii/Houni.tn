@@ -42,7 +42,7 @@ public class AutreChargeController {
     }
     @PreAuthorize("hasRole('Fournisseur')")
     @PutMapping("/edit")
-    void update(@RequestBody AutreCharge c){
+    void update(@Valid @RequestBody AutreCharge c){
         autreChargeService.update(c);
     }
     @PreAuthorize("hasRole('Fournisseur')")

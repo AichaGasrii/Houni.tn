@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class ItemFactureController {
     }
 
     @PostMapping("/add/{factureId}")
-    void add(@RequestBody ItemFacture i, @PathVariable ("factureId") Integer factureId) {
+    void add(@Valid @RequestBody ItemFacture i, @PathVariable ("factureId") Integer factureId) {
         if(Objects.nonNull(i.getOffreProduit()) && Objects.nonNull(i.getOffreProduit().getId()) &&  Objects.nonNull(i.getOffreService()) && Objects.nonNull(i.getOffreService().getId())) {
             OffreProduit offreProduit =  offrePService.retrieve(i.getOffreProduit().getId());
             OffreService offreService = offreSService.retrieve(i.getOffreService().getId());
@@ -44,7 +45,7 @@ public class ItemFactureController {
     }
 
     @PutMapping("/edit")
-    void update(@RequestBody ItemFacture i){
+    void update(@Valid @RequestBody ItemFacture i){
         itemFactureService.update(i);
     }
 

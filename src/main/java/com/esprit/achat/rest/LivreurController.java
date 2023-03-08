@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +61,7 @@ public class LivreurController {
 
 
     @PostMapping("/add")
-    String add(@RequestBody Livreur n )
+    String add(@Valid @RequestBody Livreur n )
     {
         livreurService.add(n);
         return ("l'ajout du livreur "+ n.getNom()+" " +
@@ -68,7 +69,7 @@ public class LivreurController {
     }
 
     @PutMapping("/edit")
-    void update(@RequestBody Livreur n) {
+    void update(@Valid @RequestBody Livreur n) {
         livreurService.update(n);
     }
     @GetMapping("/trierparnote")
