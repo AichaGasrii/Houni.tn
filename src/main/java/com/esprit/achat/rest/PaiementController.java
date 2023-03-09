@@ -33,6 +33,7 @@ import java.util.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/paiement")
@@ -101,9 +102,8 @@ public class PaiementController {
     @GetMapping("/trierparprix")
     public ResponseEntity<List<Paiement>> trierpaiementparprix() {
 
-        List<Paiement> paiements = paiementService.trierpaiementparprix();
+      return (ResponseEntity<List<Paiement>>) paiementService.trierpaiementparprix();
 
-        return new ResponseEntity<>(paiements, HttpStatus.OK);
     }
 
     @ControllerAdvice

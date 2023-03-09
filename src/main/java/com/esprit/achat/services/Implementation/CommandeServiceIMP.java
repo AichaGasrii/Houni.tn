@@ -106,7 +106,7 @@ public class CommandeServiceIMP  extends CrudServiceIMP<Commande,Integer> implem
         }
         String adresse = commande.getAdresseclient().trim().toLowerCase();
         switch (adresse) {
-            case "tunisie":
+            case "tunisia":
                 return "TND";
             case "usa":
             case "canada":

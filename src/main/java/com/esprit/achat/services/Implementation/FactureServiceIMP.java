@@ -45,7 +45,7 @@ public class FactureServiceIMP  extends CrudServiceIMP<Facture,Integer> implemen
         }
         String adresse = facture.getAdresseclient().trim().toLowerCase();
         switch (adresse) {
-            case "tunisie":
+            case "tunisia":
                 return "TND";
             case "usa":
             case "canada":

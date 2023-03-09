@@ -29,13 +29,13 @@ public class AppelOffre implements Serializable {
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String objet;
     @Pattern(regexp = "^[a-zA-Z\\s]*$")
-    @Size(min = 10, message = "Le champ code doit avoir au maximum 10 caractères")
+    @Size(min = 10, message = "Le champ code doit avoir au minimum 10 caractères")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String description;
 
     private Double prixTotal;
 
-    @Column(name = "quantiteMin", nullable = false, unique = true)
+    @Column(name = "quantiteMin", nullable = false)
     private Integer quantiteMin;
 
     private Boolean accepte;

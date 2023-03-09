@@ -22,7 +22,7 @@ public class PaiementServiceIMP extends CrudServiceIMP<Paiement,Integer> impleme
         }
         String adresse = paiement.getPays().trim().toLowerCase();
         switch (adresse) {
-            case "tunisie":
+            case "tunisia":
                 return "TND";
             case "usa":
             case "canada":

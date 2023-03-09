@@ -57,8 +57,8 @@ public class PDFGeneratorService {
         table.addCell(cellValue);
         table.setHeaderRows(1);
 
-        table.addCell("ID");
-        table.addCell(facture.getId().toString());
+      //  table.addCell("ID");
+      //  table.addCell(facture.getId().toString());
         table.addCell("DateFacture");
         table.addCell(facture.getDatefacture().toString());
         table.addCell("Client");
