@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
-@Table(name = "Product_offer")
+//@Table(name = "Product_offer")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class OffreProduit implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @Column(name = "nom", nullable = false)
     private String nom;
 

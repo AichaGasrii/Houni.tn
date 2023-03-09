@@ -37,17 +37,17 @@ public class LivraisonController {
         return livraisonService.getLivreurLePlusProche(latitude, longitude);
     }
 
-
+    @PreAuthorize("hasRole('Operateur')")
     @PostMapping("/affecterFtoL/{factureId}/{livraisonId}")
     public ResponseEntity<?> affecterFactureLivraison(@PathVariable Integer factureId, @PathVariable Long livraisonId) {
         livraisonService.affecterFactureLivraison(factureId, livraisonId);
         return ResponseEntity.ok().build();
     }
     @PreAuthorize("hasRole('User')")
-    @PostMapping("/planifierliv/{facture}/{livreur}")
-    public String planifierLivraison(@PathVariable Facture facture, @PathVariable Livreur livreur)
+    @PostMapping("/planifierliv/{facture}/{livreur}/{typeLivraison}")
+    public String planifierLivraison(@PathVariable Facture facture, @PathVariable Livreur livreur, @PathVariable String typeLivraison)
     {
-        return livraisonService.planifierLivraison(facture,livreur);
+        return livraisonService.planifierLivraison(facture,livreur,typeLivraison);
     }
     @PreAuthorize("hasRole('User')")
     @PostMapping("/Annuler/{id}")
@@ -60,17 +60,17 @@ public class LivraisonController {
     void update(@RequestBody Livraison n) {
         livraisonService.update(n);
     }
-    @PreAuthorize("hasRole('User')")
+    @PreAuthorize("hasRole('Admin')")
     @DeleteMapping("/delete/{id}")
     void remove(@PathVariable("id") Long id) {
         livraisonService.remove(id);
     }
-    @PreAuthorize("hasRole('User')")
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping("/{id}")
     Livraison retrieve(@PathVariable("id") Long id) {
         return livraisonService.retrieve(id);
     }
-    @PreAuthorize("hasRole('User')")
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping("/getLivraison")
     List<Livraison> retrieveAll() {
         return livraisonService.retrieveAll();

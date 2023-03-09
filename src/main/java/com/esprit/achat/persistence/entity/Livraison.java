@@ -25,6 +25,7 @@ public class Livraison implements Serializable {
 
     private LocalDate datePlanification ;
 
+   private String typeLivraison ;
     private LocalDate dateLivraison;
 
    // private String AdresseClient ;

@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "Question")
+//@Table(name = "Question")
 @Getter
 @Setter
 @NoArgsConstructor

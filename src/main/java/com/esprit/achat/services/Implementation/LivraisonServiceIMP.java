@@ -13,6 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -30,48 +31,6 @@ public class LivraisonServiceIMP extends CrudServiceIMP<Livraison,Long> implemen
     private FactureRepository factureRepository;
     @Autowired
     private ReclamationRepositoryMy reclamationRepositoryMy ;
-/*
-    public String creerLivraison(Livraison livraison ,Facture facture) {
-        // Trouver le livreur le plus proche
-        Livreur livreurLePlusProche = getLivreurLePlusProche(livraison.getAdresse().getLatitude(), livraison.getAdresse().getLongitude());
-
-        // Vérifier si un livreur est disponible
-        if (livreurLePlusProche == null) {
-            return "Aucun livreur disponible pour le moment.";
-        }
-
-        // Vérifier si le livreur est disponible
-        if (livreurLePlusProche.getDisponible() != Disponibilite.DISPONIBLE) {
-            return "Le livreur " + livreurLePlusProche.getNom() + " est indisponible pour le moment.";
-        }
-
-        // Associer le livreur à la livraison
-        livraison.setLivreur(livreurLePlusProche);
-        livraison.setDatePlanification(LocalDate.now());
-        livraison.setStatutLivraison(StatutLivraison.EN_COURS);
-        livraison.setDateLivraison(LocalDate.now().plusDays(2));
-        livraison.setFacture(facture);
-        facture.setLivraison(livraison);
-
-        // Associer l'adresse du client à la livraison
-        Adresse adresseClient = adresseRepository.findByLatitudeAndLongitude(livraison.getAdresse().getLatitude(), livraison.getAdresse().getLongitude());
-        if (adresseClient == null) {
-            adresseClient = livraison.getAdresse();
-            adresseRepository.save(adresseClient);
-        }
-        livraison.setAdresse(adresseClient);
-
-        // Enregistrer la livraison dans la base de données
-        livraisonRepository.save(livraison);
-        factureRepository.save(facture);
-
-        // Mettre à jour la disponibilité du livreur
-        livreurLePlusProche.setDisponible(Disponibilite.OCCUPE);
-        livreurRepository.save(livreurLePlusProche);
-
-        return "La livraison a été planifiée avec succès pour la commande numéro " + facture.getId() + "";
-    }
-*/
 
     public Livreur  getLivreurLePlusProche(Double latitude, Double longitude) {
         List<Livreur> livreurs = livreurRepository.findByDisponible(Disponibilite.DISPONIBLE);
@@ -150,21 +109,41 @@ public class LivraisonServiceIMP extends CrudServiceIMP<Livraison,Long> implemen
     }
 
     @Transactional
-    public String planifierLivraison(Facture facture, Livreur livreur) {
+    public String planifierLivraison(Facture facture, Livreur livreur, String typeLivraison) {
         if ((livreur.getDisponible() == Disponibilite.OCCUPE) || (livreur.getDisponible() == Disponibilite.EN_Pause)) {
-
             // Si le livreur est indisponible, retourner un message d'erreur
             return "Le livreur " + livreur.getNom() + " est " + livreur.getDisponible() + " pour le moment.";
         }
+
         // Assigner le livreur à la commande
         facture.setLivreur(livreur);
-        facture.setDateLivraison(LocalDate.now().plusDays(2));
+
+        // Déterminer la date de livraison selon le type de livraison
+        LocalDate dateLivraison;
+        if (typeLivraison.equals("rapide")) {
+            facture.setFraisLivraison(facture.getFraisLivraison() + 5.0); // Ajouter 5 dinars de frais pour la livraison rapide
+            dateLivraison = LocalDate.now().plusDays(3);
+        } else if (typeLivraison.equals("express")) {
+            facture.setFraisLivraison(facture.getFraisLivraison() + 10.0); // Ajouter 10 dinars de frais pour la livraison express
+            dateLivraison = LocalDate.now().plusDays(1);
+        }  else if (typeLivraison.equals("normal")) {
+            facture.setFraisLivraison(facture.getFraisLivraison() + 3.0); // Ajouter 10 dinars de frais pour la livraison express
+            dateLivraison = LocalDate.now().plusDays(7);
+        }
+        else {
+            // Si le type de livraison n'est pas reconnu, retourner un message d'erreur
+            return "Type de livraison inconnu : " + typeLivraison;
+        }
+
+        facture.setDateLivraison(dateLivraison);
 
         // Créer un nouveau suivi de livraison pour la commande
         Livraison livraison = new Livraison();
         livraison.setDatePlanification(LocalDate.now());
         livraison.setStatutLivraison(StatutLivraison.EN_COURS);
-        livraison.setDateLivraison(LocalDate.now().plusDays(2));
+        livraison.setDateLivraison(dateLivraison);
+        livraison.setTypeLivraison(typeLivraison);
+        livraison.setAdresse(livreur.getAdresse());
         livraison.setLivreur(livreur);
         livraison.setFacture(facture);
         facture.setLivraison(livraison);
@@ -182,7 +161,7 @@ public class LivraisonServiceIMP extends CrudServiceIMP<Livraison,Long> implemen
         // Retourner un message de confirmation avec les détails de la livraison
         return "La livraison a été planifiée avec succès pour la commande numéro " + facture.getId() +
                 " vers l'emplacement " + facture.getAdresseclient() + " avec le livreur " + livreur.getNom() +
-                " pour le " + livraison.getDateLivraison() + ". Le frais de livraison est de " + facture.getDevise() + " dinars.";
+                " pour le " + livraison.getDateLivraison() + ". Le frais de livraison est de " + facture.getFraisLivraison() + " dinars.";
     }
 
     public double distance(double lat1, double lon1, double lat2, double lon2) {

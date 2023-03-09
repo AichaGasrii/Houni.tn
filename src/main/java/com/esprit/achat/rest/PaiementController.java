@@ -98,6 +98,14 @@ public class PaiementController {
     public Integer nbPaiementParMethode (@PathVariable Methode methode){
         return  paiementService.nbPaiementParMethode(methode);}
 
+    @GetMapping("/trierparprix")
+    public ResponseEntity<List<Paiement>> trierpaiementparprix() {
+
+        List<Paiement> paiements = paiementService.trierpaiementparprix();
+
+        return new ResponseEntity<>(paiements, HttpStatus.OK);
+    }
+
     @ControllerAdvice
     public class CommandeControllerAdvice {
 

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Item_Invoice_Credit")
+//@Table(name = "Item_Invoice_Credit")
 @Getter
 @Setter
 @NoArgsConstructor

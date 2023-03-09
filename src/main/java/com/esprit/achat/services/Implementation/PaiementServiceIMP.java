@@ -82,5 +82,11 @@ public class PaiementServiceIMP extends CrudServiceIMP<Paiement,Integer> impleme
 
         return nbr;
     }
+    @Override
+    public List<Paiement> trierpaiementparprix()
+    {
+        return paiementRepository.findAllOrderByprixASC();
+    }
+
 
 }

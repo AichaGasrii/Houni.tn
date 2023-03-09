@@ -6,12 +6,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "Purchase_Request")
+//@Table(name = "Purchase_Request")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,14 +24,14 @@ public class DemandeAchat implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "ID")
     protected Integer id ;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String nom;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String objet;
-    @Size(max = 10, message = "Le champ code doit avoir au maximum 10 caractères")
-
+    @Size(min = 10, message = "Le champ code doit avoir au maximum 10 caractères")
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String description;
 

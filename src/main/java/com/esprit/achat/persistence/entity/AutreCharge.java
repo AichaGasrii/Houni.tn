@@ -6,15 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "Other_Charge")
+//@Table(name = "Other_Charge")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,10 +23,11 @@ public class AutreCharge implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "ID")
     protected Integer id;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String nom;
-    @Size(max = 10, message = "Le champ code doit avoir au maximum 10 caractères")
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @Size(min = 10, message = "Le champ code doit avoir au maximum 10 caractères")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String description;
 

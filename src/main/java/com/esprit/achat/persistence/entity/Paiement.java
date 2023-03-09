@@ -13,7 +13,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
-@Table(name = "Payment")
+//@Table(name = "Payment")
 @Getter
 @Setter
 @NoArgsConstructor

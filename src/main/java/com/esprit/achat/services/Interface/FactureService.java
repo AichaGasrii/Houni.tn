@@ -14,10 +14,12 @@ public interface FactureService extends CrudService<Facture, Integer> {
     Double  calculermontantTTC(Facture facture);
 
 
-    List<ItemFacture> listeDesItemParFacture(Integer factureId);
+  //  List<ItemFacture> listeDesItemParFacture(Integer factureId);
 
     String obtenirDevisePourFacture(Facture facture);
 
     void affecterDeviseAuxFactures();
+
+    List<Facture> trierfactureParTotal();
 }
 

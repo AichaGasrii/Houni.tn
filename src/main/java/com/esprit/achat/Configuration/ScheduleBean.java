@@ -2,8 +2,10 @@ package com.esprit.achat.Configuration;
 
 import com.esprit.achat.persistence.entity.Commande;
 import com.esprit.achat.persistence.enumeration.Etat;
+import com.esprit.achat.persistence.enumeration.OffreType;
 import com.esprit.achat.repositories.CodePromoRepository;
 import com.esprit.achat.repositories.CommandeRepository;
+import com.esprit.achat.repositories.DemandeAchatReporitory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +42,8 @@ public class ScheduleBean  {
     CodePromoRepository codePromoRepository;
     @Autowired
     CommandeRepository commandeRepository;
+    @Autowired
+    DemandeAchatReporitory demandeAchatReporitory;
 
   //  @Scheduled(cron = "*/30 * * * * *")
     public void scheduleCommandeStatusUpdate() {
@@ -81,4 +85,13 @@ public class ScheduleBean  {
                         )
                 );
     }
+
+
+
+    // @Scheduled(cron = "*/30 * * * * *")
+    public void nbreAchatParType() {
+        log.info("--- Nombre des demandes d'achat PRODUIT :" + demandeAchatReporitory.nbreAchatParType(OffreType.PRODUIT));
+        log.info("--- Nombre des demandes d'achat SERVICE : " + demandeAchatReporitory.nbreAchatParType(OffreType.SERVICE));
+    }
+
 }

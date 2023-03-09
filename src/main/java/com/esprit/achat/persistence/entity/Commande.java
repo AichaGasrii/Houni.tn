@@ -17,7 +17,7 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 @Entity
-@Table(name = "Commande")
+//@Table(name = "Commande")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,9 +39,10 @@ public class Commande implements Serializable {
     @Pattern(regexp = "[0-9]{8}", message = "Le CIN doit être composé de 8 chiffres")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String clientcin;
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String client;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String reponsableclient;
 
@@ -56,7 +57,7 @@ public class Commande implements Serializable {
     @Column(name = "date_creation")
     private LocalDate dateCreation;
 
-  //  @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")
     private Double totalttc;
     private Boolean archive;
     @Enumerated(EnumType.STRING)

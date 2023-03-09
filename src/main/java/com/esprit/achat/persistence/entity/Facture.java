@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "Invoice")
+//@Table(name = "Invoice")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,6 +43,8 @@ public class Facture implements Serializable {
     @PastOrPresent(message = "La date de la facture doit être dans le passé ou le présent")
     @Temporal(TemporalType.DATE)
     private Date datefacture;
+
+    private double fraisLivraison ;
 
     private LocalDate dateLivraison;
    // @DecimalMin(value = "0.0", inclusive = false, message = "Le total TTC doit être supérieur à 0")

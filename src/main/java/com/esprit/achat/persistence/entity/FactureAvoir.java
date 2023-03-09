@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Credit_Invoice")
+//@Table(name = "Credit_Invoice")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -1,10 +1,8 @@
 package com.esprit.achat.persistence.entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+
 import com.esprit.achat.persistence.enumeration.Disponibilite;
 import com.esprit.achat.persistence.enumeration.HoraireTravail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,14 +32,16 @@ public class Livreur implements Serializable {
     @NotNull
     @Size(min = 2, max = 50)
     @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @NotBlank(message = "ce champ ne doit pas être vide")
     private String nom;
     @NotNull
     @Size(min = 2, max = 50)
     @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @NotBlank(message = "ce champ ne doit pas être vide")
     private String prenom;
 
     @PositiveOrZero
-    private double MoyenneNote ;
+    private double MoyenneNote =0;
     //   private Integer NoteLivraison ;
     @Enumerated(EnumType.STRING)
     private HoraireTravail horaireTravail;
@@ -49,12 +49,16 @@ public class Livreur implements Serializable {
     @NotNull
     @Size(min = 8, max = 15)
     @Pattern(regexp = "^\\+?[0-9\\s]*$")
+    @NotBlank(message = "ce champ ne doit pas être vide")
     private String telephone;
     @Enumerated(EnumType.STRING)
     private Disponibilite disponible;
     @NotNull
     @PositiveOrZero
     private Integer DisLikes=0;
+
+    @PositiveOrZero
+    private Integer nombreNotes=0;
 
     private LocalDate dateCreation ;
     @NotNull

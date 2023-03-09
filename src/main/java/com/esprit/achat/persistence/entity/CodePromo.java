@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import java.io.Serializable;
 @Entity
-@Table(name = "Promo_Code")
+//@Table(name = "Promo_Code")
 @Getter
 @Setter
 @NoArgsConstructor

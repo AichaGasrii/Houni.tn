@@ -5,6 +5,8 @@ import com.esprit.achat.persistence.entity.Paiement;
 import com.esprit.achat.persistence.entity.Question;
 import com.esprit.achat.persistence.enumeration.Methode;
 
+import java.util.List;
+
 public interface PaiementService extends CrudService<Paiement, Integer> {
 
     String obtenirDevisePourPaiement(Paiement paiement);
@@ -12,5 +14,7 @@ public interface PaiementService extends CrudService<Paiement, Integer> {
     void affecterDeviseAuxPaiements();
 
     Integer nbPaiementParMethode(Methode methode);
+
+    List<Paiement> trierpaiementparprix();
 }
 

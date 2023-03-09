@@ -10,7 +10,7 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 @Entity
-@Table(name = "AppelOffre")
+//@Table(name = "AppelOffre")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,14 +22,14 @@ public class AppelOffre implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "ID")
     protected Integer id;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String nom;
-
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String objet;
-
-    @Size(max = 10, message = "Le champ code doit avoir au maximum 10 caractères")
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @Size(min = 10, message = "Le champ code doit avoir au maximum 10 caractères")
     @NotBlank(message = "ce champ ne doit pas être vide")
     private String description;
 

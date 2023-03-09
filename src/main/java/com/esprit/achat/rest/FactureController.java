@@ -71,10 +71,12 @@ public class FactureController {
     }
 
 
-    @GetMapping("/items-facture/{factureId}")
-    @ResponseStatus
-    public List<ItemFacture> listeDesItemParFacture(@PathVariable Integer factureId) {
-        return factureService.listeDesItemParFacture(factureId);
+    @GetMapping("/trierpartotal")
+    public ResponseEntity<List<Facture>> trierfactureParTotal() {
+
+        List<Facture> factures = factureService.trierfactureParTotal();
+
+        return new ResponseEntity<>(factures, HttpStatus.OK);
     }
 
     @PostMapping("/affecter-devise")
